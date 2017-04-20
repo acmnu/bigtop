@@ -44,7 +44,7 @@
      APACHE_MIRROR = "http://apache.osuosl.org"
      APACHE_ARCHIVE = "https://archive.apache.org/dist"
    }
-   git { // *optional* This is a global setting to access protected git repositories, 
+   git { // *optional* This is a global setting to access protected git repositories,
          //            can be specified per component as well
      user = "john_doe"
      token = "john's access token"
@@ -127,16 +127,18 @@ bigtop {
         archive       = "${apache.APACHE_ARCHIVE}/${download_path}"
       }
     }
+
     'hadoop' {
       name    = 'hadoop'
       relNotes = 'Apache Hadoop'
-      version { base = '2.7.3'; pkg = base; release = 1 }
+      version { base = '2.7.3'; pkg = '2.7.3+arenadata'; release = 1 }
       tarball { destination = "${name}-${version.base}.tar.gz"
                 source      = "${name}-${version.base}-src.tar.gz" }
-      url     { download_path = "/$name/common/$name-${version.base}"
-                site = "${apache.APACHE_MIRROR}/${download_path}"
-                archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
+      url     { download_path = "$name"
+                site = "https://storage.googleapis.com/arenadata-repo/archive/${download_path}"
+                archive = "https://storage.googleapis.com/arenadata-repo/archive/${download_path}" }
     }
+
     'ignite-hadoop' {
       name    = 'ignite-hadoop'
       relNotes = 'Apache Ignite in-memory data fabric'
