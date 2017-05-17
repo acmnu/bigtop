@@ -156,7 +156,7 @@ allprojects {
   targetCompatibility = langLevel
 
   repositories {
-    maven { url "http://10.132.0.5:8080/artifactory/jenkins" }
+    maven { url "http://10.132.0.5:8080/artifactory/jcenter" }
     mavenCentral()
   }
 }
