@@ -29,6 +29,8 @@ BUILD_OPTS="-Dversion=${FULL_VERSION} -Dhadoop.version=${HADOOP_VERSION} \
 sed -i -e '/ENTITY.*hadoop.version/s#"[^"]*"#"'${HADOOP_VERSION}'"#' ./solr/test-framework/ivy.xml ./solr/core/ivy.xml
 sed -i -e '/<dependency org="org.mortbay.jetty" name="jetty"/s#/ *>#>#' solr/core/ivy.xml
 sed -i -e '/<dependency org="org.mortbay.jetty" name="jetty"/a<artifact name="jetty" ext="jar"/></dependency>' solr/core/ivy.xml
+# http://www.oracle.com/technetwork/java/javase/8u121-relnotes-3315208.html bug
+sed -i '1960 a additionalparam="--allow-script-in-comments"' lucene/common-build.xml
 
 # FIXME: this needs to be fixed at the product level
 ant $BUILD_OPTS ivy-bootstrap
