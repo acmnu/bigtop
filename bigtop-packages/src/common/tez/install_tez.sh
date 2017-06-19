@@ -105,6 +105,7 @@ gzip -c tez.1 > $PREFIX/$MAN_DIR/tez.1.gz
 
 install -d -m 0755 $PREFIX/$LIB_DIR
 install -d -m 0755 $PREFIX/$LIB_DIR/lib
+install -d -m 0755 $PREFIX/$LIB_DIR/share
 install -d -m 0755 $PREFIX/$DOC_DIR
 install -d -m 0755 $PREFIX/$CONF_DIR
 install -d -m 0755 $PREFIX/$MAN_DIR
@@ -112,4 +113,6 @@ install -d -m 0755 $PREFIX/$MAN_DIR
 cp tez-site.xml  $PREFIX/$CONF_DIR
 
 tar -C  $PREFIX/$LIB_DIR -xzf  $BUILD_DIR/tez-dist/target/tez*-minimal.tar.gz
+
+cp ${BUILD_DIR}/tez-dist/target/tez-0.7.1.tar.gz apache-tez-${RELEASE_VERSION}-bin/share/tez.tar.gz
 
