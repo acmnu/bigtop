@@ -209,7 +209,7 @@ mkdir ${WEBAPP_DIR}
 (cd ${WEBAPP_DIR} ; jar xf ${BUILD_DIR}/oozie.war)
 # OOZIE_HOME/lib
 mv -f ${WEBAPP_DIR}/WEB-INF/lib/* ${SERVER_LIB_DIR}/lib/
-touch ${SERVER_LIB_DIR}/webapps/oozie.war
+cp ${BUILD_DIR}/oozie.war ${SERVER_LIB_DIR}/oozie.war
 
 install -m 0755 ${EXTRA_DIR}/tomcat-deployment.sh ${SERVER_LIB_DIR}/tomcat-deployment.sh
 
