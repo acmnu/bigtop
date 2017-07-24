@@ -17,7 +17,24 @@ class bigtop_toolchain::jdk {
   case $::operatingsystem {
     /Debian/: {
       require apt
-      require apt::backports
+      unless $operatingsystemmajrelease > "8" {
+         # we pin openjdk-8-* and ca-certificates-java to backports
+         require apt::backports
+
+         apt::pin { 'backports_jdk':
+            packages => 'openjdk-8-*',
+            priority => 500,
+            release  => 'jessie-backports',
+         } ->
+         apt::pin { 'backports_ca':
+            packages => 'ca-certificates-java',
+            priority => 500,
+            release  => 'jessie-backports',
+         } ->
+         exec {'own_update':
+            command => '/usr/bin/apt-get update'
+         } -> Package['openjdk-8-jdk']
+      }
 
       package { 'openjdk-8-jdk' :
         ensure => present,
@@ -41,6 +58,12 @@ class bigtop_toolchain::jdk {
     /(CentOS|Amazon|Fedora)/: {
       package { 'java-1.8.0-openjdk-devel' :
         ensure => present
+      }
+      if ($::operatingsystem == "Fedora") {
+        file { '/usr/lib/jvm/java-1.8.0-openjdk/jre/lib/security/cacerts':
+          ensure => 'link',
+          target => '/etc/pki/java/cacerts'
+        }
       }
     }
     /OpenSuSE/: {
