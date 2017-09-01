@@ -23,10 +23,12 @@ RPMS=( \
     centos-7 \
     centos-7-aarch64 \
     fedora-25 \
+    fedora-25-aarch64 \
     opensuse-42.1 \
 )
 DEBS=( \
     debian-8 \
     debian-8-aarch64 \
+    debian-9-aarch64 \
     ubuntu-16.04 \
 )

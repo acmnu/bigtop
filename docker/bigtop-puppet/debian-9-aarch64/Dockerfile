@@ -12,8 +12,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-FROM arm64v8/ubuntu:16.04
-MAINTAINER Amir Sanjar
+FROM arm64v8/debian:9
+MAINTAINER Yuqi Gu <yuqi.gu@arm.com>
 
 COPY puppetize.sh /tmp/puppetize.sh
 
