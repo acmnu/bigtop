@@ -53,15 +53,11 @@ License: ASL 2.0
 Source0: solr-%{solr_base_version}-src.tgz
 Source1: do-component-build 
 Source2: install_%{name}.sh
-Source3: server.xml
-Source4: web.xml
 Source5: logging.properties
 Source6: solr.default
 Source7: solr-server.init
 Source8: schema.xml
 Source9: solrconfig.xml
-Source10: solrctl.sh
-Source11: tomcat-deployment.sh
 Requires: bigtop-utils >= 0.7, bigtop-tomcat
 
 # CentOS 5 does not have any dist macro
@@ -160,11 +156,8 @@ fi
 #######################
 %files 
 %defattr(-,root,root,755)
-%config(noreplace) %{config_solr}.dist
-%config(noreplace) %{tomcat_deployment_solr}.dist
 %config(noreplace) /etc/default/solr 
 %{lib_solr}
-%{bin_solr}/solrctl
 %defattr(-,solr,solr,755)
 /var/lib/solr
 /var/run/solr
