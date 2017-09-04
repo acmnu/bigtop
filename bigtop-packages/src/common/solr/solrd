@@ -1,0 +1,90 @@
+#!/bin/bash
+
+BIGTOP_DEFAULTS_DIR=${BIGTOP_DEFAULTS_DIR-/etc/default}
+[ -n "${BIGTOP_DEFAULTS_DIR}" -a -r ${BIGTOP_DEFAULTS_DIR}/solr ] && . ${BIGTOP_DEFAULTS_DIR}/solr
+
+# Autodetect JAVA_HOME if not defined
+. /usr/lib/bigtop-utils/bigtop-detect-javahome
+
+# resolve links - $0 may be a softlink
+PRG="${BASH_SOURCE[0]}"
+
+while [ -h "${PRG}" ]; do
+  ls=`ls -ld "${PRG}"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG=`dirname "${PRG}"`/"$link"
+  fi
+done
+
+BASEDIR=`dirname ${PRG}`
+BASEDIR=`cd ${BASEDIR}/..;pwd`
+
+export SOLR_HOME=${SOLR_HOME:-/var/lib/solr}
+export SOLR_PORT=${SOLR_PORT:-8983}
+export SOLR_ADMIN_PORT=${SOLR_ADMIN_PORT:-8984}
+export SOLR_LOG4J_CONFIG=${SOLR_LOG4J_CONFIG:-/var/lib/solr/log4j.properties}
+export SOLR_LOGS_DIR=${SOLR_LOGS_DIR:-/var/log/solr}
+export SOLR_PID_DIR=${SOLR_RUN:-/var/run/solr}
+
+die() {
+  echo "$@" >&2
+  exit 1
+}
+
+SOLR_OPTS="${SOLR_OPTS} -Dsolr.solrxml.location=zookeeper"
+
+if [ -n "$SOLR_HDFS_HOME" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Dsolr.hdfs.home=${SOLR_HDFS_HOME}"
+fi
+
+if [ -n "$SOLR_HDFS_CONFIG" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Dsolr.hdfs.confdir=${SOLR_HDFS_CONFIG}"
+fi
+
+if [ "$SOLR_KERBEROS_ENABLED" == "true" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Dsolr.hdfs.security.kerberos.enabled=${SOLR_KERBEROS_ENABLED}"
+fi
+
+if [ -n "$SOLR_KERBEROS_KEYTAB" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Dsolr.hdfs.security.kerberos.keytabfile=${SOLR_KERBEROS_KEYTAB}"
+fi
+
+if [ -n "$SOLR_KERBEROS_PRINCIPAL" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Dsolr.hdfs.security.kerberos.principal=${SOLR_KERBEROS_PRINCIPAL}"
+fi
+
+if [ -n "$SOLR_AUTHENTICATION_TYPE" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Dsolr.authentication.type=${SOLR_AUTHENTICATION_TYPE}"
+fi
+
+if [ -n "$SOLR_AUTHENTICATION_KERBEROS_KEYTAB" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Dsolr.authentication.kerberos.keytab=${SOLR_AUTHENTICATION_KERBEROS_KEYTAB}"
+fi
+
+if [ -n "$SOLR_AUTHENTICATION_KERBEROS_PRINCIPAL" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Dsolr.authentication.kerberos.principal=${SOLR_AUTHENTICATION_KERBEROS_PRINCIPAL}"
+fi
+
+if [ -n "$SOLR_AUTHENTICATION_KERBEROS_NAME_RULES" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Dsolr.authentication.kerberos.name.rules=${SOLR_AUTHENTICATION_KERBEROS_NAME_RULES}"
+fi
+
+if [ -n "$SOLR_AUTHENTICATION_SIMPLE_ALLOW_ANON" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Dsolr.authentication.simple.anonymous.allowed=${SOLR_AUTHENTICATION_SIMPLE_ALLOW_ANON}"
+fi
+
+if [ -n "$SOLR_AUTHENTICATION_JAAS_CONF" ] ; then
+  SOLR_OPTS="${SOLR_OPTS} -Djava.security.auth.login.config=${SOLR_AUTHENTICATION_JAAS_CONF}"
+fi
+
+SOLR_OPTS="${SOLR_OPTS} -Dsolr.host=$HOSTNAME
+                                        -Dsolr.port=$SOLR_PORT
+                                        -Dlog4j.configuration=file://$SOLR_LOG4J_CONFIG
+                                        -Dsolr.log=$SOLR_LOGS_DIR
+                                        -Dsolr.admin.port=$SOLR_ADMIN_PORT
+                                        -Dsolr.solr.home=$SOLR_HOME"
+
+exec ${BASEDIR}/bin/solr "$@" ${SOLR_OPTS}
