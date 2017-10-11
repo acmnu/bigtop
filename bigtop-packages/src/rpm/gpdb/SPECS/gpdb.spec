@@ -49,11 +49,11 @@ gpdb
 #BIGTOP_PATCH_COMMANDS
 
 %build
-bash %{SOURCE3} %{bin_gpdb}
-bash %{SOURCE1}
 
 %install
 %__rm -rf $RPM_BUILD_ROOT
+bash %{SOURCE3} %{bin_gpdb} %{_tmppath}
+bash %{SOURCE1}
 bash %{SOURCE2} %{_tmppath}
 mkdir -p $RPM_BUILD_ROOT%{bin_gpdb}
 cp -f -r %{_tmppath}%{bin_gpdb}/* $RPM_BUILD_ROOT/%{bin_gpdb}

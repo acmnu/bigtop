@@ -16,4 +16,31 @@
 
 set -ex
 
-./configure --prefix=$1 --disable-orca
+mkdir  -p add_libs
+cd add_libs
+wget https://github.com/greenplum-db/gp-xerces/archive/v3.1.2-p1.zip
+unzip v3.1.2-p1.zip
+
+cd gp-xerces-3.1.2-p1/
+mkdir build
+cd build
+../configure --prefix=$1
+make
+make install DESTDIR=$2
+cd ../..
+
+orca_ver=2.42.3
+wget https://github.com/greenplum-db/gporca/archive/v${orca_ver}.zip
+unzip v${orca_ver}.zip
+cd gporca-${orca_ver}
+mkdir build
+cd build
+
+cmake -GNinja -DXERCES_INCLUDE_DIR=$2/$1/include -DXERCES_LIBRARY=$2/$1/lib/libxerces-c-3.1.so -DCMAKE_INSTALL_PREFIX=$1 ../
+DESTDIR=$2 ninja-build install 
+cd ../..
+
+export LD_LIBRARY_PATH=$2/$1/lib:$LD_LIBRARY_PATH
+
+cd ..
+./configure --prefix=$1 --with-includes=$2/$1/include --with-libraries=$2/$1/lib
