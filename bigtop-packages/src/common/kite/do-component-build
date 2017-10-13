@@ -18,19 +18,31 @@ set -ex
 
 . `dirname $0`/bigtop.bom
 
-export MAVEN_OPTS="-Xmx1536m -Xms256m"
+mvn clean install \
+  -DjavaVersion=${JDK_VERSION} \
+  -Dvers.hadoop2=${HADOOP_VERSION} \
+  -Dvers.hbase2=${HBASE_VERSION} \
+  -Dvers.flume=${FLUME_VERSION} \
+  -Dvers.spark=${SPARK_VERSION} \
+  -Dvers.crunch=${CRUNCH_VERSION} \
+  -DskipTests -Dmaven.repo.local=${HOME}/.m2/repository "$@"
 
-sed -i -e \
-'s#<artifactId>asynchbase</artifactId>#<artifactId>asynchbase</artifactId>\n<exclusions>\n<exclusion>\n<groupId>org.apache.zookeeper</groupId>\n<artifactId>zookeeper</artifactId>\n</exclusion>\n</exclusions>#' flume-ng-sinks/flume-ng-hbase-sink/pom.xml
+rm -rf build
+
+mkdir -p build/kite-${KITE_VERSION}/{bin,lib}
+
+# Kite Data
+cp kite-data/kite-*/target/kite-*.jar build/kite-${KITE_VERSION}/lib
+# Kite Tools
+cp kite-tools-parent/kite-tools/target/kite-dataset build/kite-${KITE_VERSION}/bin/
+cp kite-tools-parent/kite-tools/target/kite-*.jar build/kite-${KITE_VERSION}/lib/
+
+# Kite Morphlines
+cp kite-morphlines/kite-morphlines-all/target/lib/* build/kite-${KITE_VERSION}/lib/
+
+# Kite Maven plugin
+cp kite-maven-plugin/target/kite-*.jar build/kite-${KITE_VERSION}/lib/
 
 
-# The following is weird, but true: yes *hadoop*.profile is hbase-98
-# This profile will activate hadoop2.version as the relevant property
-# and will also make us specify hbase version with -hadoop2 prefix
-mvn -DskipTests  \
-  -Dhadoop2.version=$HADOOP_VERSION        \
-  -Dhbase.version=${HBASE_VERSION} \
-  -Dkite.version=${KITE_VERSION} \
-  -Dhive.version=${HIVE_VERSION} \
-  -Dkafka.version=${KAFKA_VERSION} \
-  clean install "$@"
+
+
