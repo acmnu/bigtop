@@ -1,0 +1,226 @@
+From be83cc97a3ba74e9df6f869b1863872fc55102aa Mon Sep 17 00:00:00 2001
+From: Anton Chevychalov <cab@arenadata.io>
+Date: Sun, 15 Oct 2017 18:48:39 +0300
+Subject: [PATCH] ADH-203 that fix regres in Hadoop after Zoo bump
+
+There is a trouble with zookeper in
+org.apache.hadoop:hadoop-yarn-server-resourcemanager
+
+So we need to make zookeeper's exclusions almost
+in any resourcemanger inclusions.
+
++-org.apache.hadoop:hadoop-yarn-applications-distributedshell:2.8.1
+  +-org.apache.hadoop:hadoop-yarn-server-resourcemanager:2.8.1
+    +-org.apache.zookeeper:zookeeper:3.4.10
+and
++-org.apache.hadoop:hadoop-yarn-applications-distributedshell:2.8.1
+  +-org.apache.hadoop:hadoop-yarn-server-resourcemanager:2.8.1
+    +-org.apache.zookeeper:zookeeper:3.4.6
+---
+ .../hadoop-mapreduce-client-app/pom.xml                     | 12 ++++++++++++
+ .../hadoop-mapreduce-client-jobclient/pom.xml               | 12 ++++++++++++
+ hadoop-project/pom.xml                                      | 12 ++++++++++++
+ hadoop-tools/hadoop-archive-logs/pom.xml                    |  6 ++++++
+ .../hadoop-yarn-applications-distributedshell/pom.xml       |  6 ++++++
+ hadoop-yarn-project/hadoop-yarn/hadoop-yarn-client/pom.xml  | 13 +++++++++++++
+ .../hadoop-yarn-server/hadoop-yarn-server-tests/pom.xml     | 12 ++++++++++++
+ hadoop-yarn-project/pom.xml                                 |  6 ++++++
+ 8 files changed, 79 insertions(+)
+
+diff --git a/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-app/pom.xml b/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-app/pom.xml
+index 98baa55..d971c26 100644
+--- a/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-app/pom.xml
++++ b/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-app/pom.xml
+@@ -61,11 +61,23 @@
+     <dependency>
+       <groupId>org.apache.hadoop</groupId>
+       <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++             <groupId>org.apache.zookeeper</groupId>
++             <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
+       <scope>test</scope>
+     </dependency>
+     <dependency>
+       <groupId>org.apache.hadoop</groupId>
+       <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++             <groupId>org.apache.zookeeper</groupId>
++             <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
+       <type>test-jar</type>
+       <scope>test</scope>
+     </dependency>
+diff --git a/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-jobclient/pom.xml b/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-jobclient/pom.xml
+index 87392e2..acddd00 100644
+--- a/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-jobclient/pom.xml
++++ b/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-jobclient/pom.xml
+@@ -74,11 +74,23 @@
+     <dependency>
+       <groupId>org.apache.hadoop</groupId>
+       <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++             <groupId>org.apache.zookeeper</groupId>
++             <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
+       <scope>test</scope>
+     </dependency>
+     <dependency>
+       <groupId>org.apache.hadoop</groupId>
+       <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++             <groupId>org.apache.zookeeper</groupId>
++             <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
+       <type>test-jar</type>
+       <scope>test</scope>
+     </dependency>
+diff --git a/hadoop-project/pom.xml b/hadoop-project/pom.xml
+index 7489cda..3d47237 100644
+--- a/hadoop-project/pom.xml
++++ b/hadoop-project/pom.xml
+@@ -284,11 +284,23 @@
+         <groupId>org.apache.hadoop</groupId>
+         <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
+         <version>${project.version}</version>
++        <exclusions>
++          <exclusion>
++               <groupId>org.apache.zookeeper</groupId>
++               <artifactId>zookeeper</artifactId>
++          </exclusion>
++        </exclusions>
+       </dependency>
+       <dependency>
+         <groupId>org.apache.hadoop</groupId>
+         <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
+         <version>${project.version}</version>
++        <exclusions>
++          <exclusion>
++               <groupId>org.apache.zookeeper</groupId>
++               <artifactId>zookeeper</artifactId>
++          </exclusion>
++        </exclusions>
+         <type>test-jar</type>
+       </dependency>
+ 
+diff --git a/hadoop-tools/hadoop-archive-logs/pom.xml b/hadoop-tools/hadoop-archive-logs/pom.xml
+index 4daef12..f68f287 100644
+--- a/hadoop-tools/hadoop-archive-logs/pom.xml
++++ b/hadoop-tools/hadoop-archive-logs/pom.xml
+@@ -109,6 +109,12 @@
+     <dependency>
+       <groupId>org.apache.hadoop</groupId>
+       <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++             <groupId>org.apache.zookeeper</groupId>
++             <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
+       <scope>provided</scope>
+     </dependency>
+     <!-- 'mvn dependency:analyze' fails to detect use of this dependency -->
+diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-distributedshell/pom.xml b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-distributedshell/pom.xml
+index b4dbcb8..d7136fb 100644
+--- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-distributedshell/pom.xml
++++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-distributedshell/pom.xml
+@@ -107,6 +107,12 @@
+     <dependency>
+       <groupId>org.apache.hadoop</groupId>
+       <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++             <groupId>org.apache.zookeeper</groupId>
++             <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
+       <scope>test</scope>
+     </dependency>
+     <!-- 'mvn dependency:analyze' fails to detect use of this dependency -->
+diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-client/pom.xml b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-client/pom.xml
+index 9b597e5..776bb70 100644
+--- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-client/pom.xml
++++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-client/pom.xml
+@@ -115,6 +115,13 @@
+     <dependency>
+   		<groupId>org.apache.hadoop</groupId>
+   		<artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++             <groupId>org.apache.zookeeper</groupId>
++             <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
++
+       <scope>test</scope>
+   	</dependency>
+     <!-- 'mvn dependency:analyze' fails to detect use of this dependency -->
+@@ -128,6 +135,12 @@
+     <dependency>
+     <groupId>org.apache.hadoop</groupId>
+     <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++             <groupId>org.apache.zookeeper</groupId>
++             <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
+       <scope>test</scope>
+       <type>test-jar</type>
+     </dependency>
+diff --git a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-tests/pom.xml b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-tests/pom.xml
+index 401c40a..5cdbc87 100644
+--- a/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-tests/pom.xml
++++ b/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-tests/pom.xml
+@@ -77,11 +77,23 @@
+     <dependency>
+       <groupId>org.apache.hadoop</groupId>
+       <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++	      <groupId>org.apache.zookeeper</groupId>
++	      <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
+     </dependency>
+     <!-- 'mvn dependency:analyze' fails to detect use of this dependency -->
+     <dependency>
+       <groupId>org.apache.hadoop</groupId>
+       <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++	      <groupId>org.apache.zookeeper</groupId>
++	      <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
+       <type>test-jar</type>
+       <scope>test</scope>
+     </dependency>
+diff --git a/hadoop-yarn-project/pom.xml b/hadoop-yarn-project/pom.xml
+index 3299aa7..6c933bb 100644
+--- a/hadoop-yarn-project/pom.xml
++++ b/hadoop-yarn-project/pom.xml
+@@ -70,6 +70,12 @@
+     <dependency>
+       <groupId>org.apache.hadoop</groupId>
+       <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
++      <exclusions>
++        <exclusion>
++             <groupId>org.apache.zookeeper</groupId>
++             <artifactId>zookeeper</artifactId>
++        </exclusion>
++      </exclusions>
+     </dependency>
+     <dependency>
+       <groupId>org.apache.hadoop</groupId>
+-- 
+2.7.4
+
