@@ -16,6 +16,8 @@
 
 set -ex
 
+yum install -y json-c json-c-devel
+
 mkdir  -p add_libs
 cd add_libs
 wget https://github.com/greenplum-db/gp-xerces/archive/v3.1.2-p1.zip
@@ -43,4 +45,4 @@ cd ../..
 export LD_LIBRARY_PATH=$2/$1/lib:$LD_LIBRARY_PATH
 
 cd ..
-./configure --prefix=$1 --with-includes=$2/$1/include --with-libraries=$2/$1/lib
+./configure --prefix=$1 --with-includes=$2/$1/include --with-libraries=$2/$1/lib --enable-pxf
