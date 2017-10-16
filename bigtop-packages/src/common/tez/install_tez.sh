@@ -114,4 +114,4 @@ cp tez-site.xml  $PREFIX/$CONF_DIR
 
 tar -C  $PREFIX/$LIB_DIR -xzf  $BUILD_DIR/tez-dist/target/tez*-minimal.tar.gz
 
-cp ${BUILD_DIR}/tez-dist/target/tez-0.7.1.tar.gz $PREFIX/$LIB_DIR/share/tez.tar.gz
+cp ${BUILD_DIR}/tez-dist/target/tez-0.9.0.tar.gz $PREFIX/$LIB_DIR/share/tez.tar.gz
