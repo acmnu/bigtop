@@ -32,6 +32,8 @@ BUILD_OPTS="-Divy.home=${HOME}/.ivy2 -Dsbt.ivy.home=${HOME}/.ivy2 -Duser.home=${
             -Phive -Phive-thriftserver \
             $SPARK_BUILD_OPTS"
 
+export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=1024m"
+
 ./dev/make-distribution.sh $BUILD_OPTS -DskipTests
 
 SPARK_SKIP_TESTS=$([ "$SPARK_RUN_TESTS" = "true" ] && echo false || echo true)
