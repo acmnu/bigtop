@@ -29,7 +29,7 @@ make
 make install DESTDIR=$2
 cd ../..
 
-orca_ver=2.42.3
+orca_ver=2.46.6
 wget https://github.com/greenplum-db/gporca/archive/v${orca_ver}.zip
 unzip v${orca_ver}.zip
 cd gporca-${orca_ver}
