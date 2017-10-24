@@ -118,6 +118,7 @@ bigtop {
     hbase:['phoenix','giraph','ycsb','hive'],
     pig:['datafu', 'oozie'],
     hive:['oozie', 'pig','zeppelin'],
+    hive2:['oozie', 'pig','zeppelin'],
     'ignite-hadoop':['zeppelin'],
     spark:['zeppelin']
   ]
@@ -191,6 +192,16 @@ bigtop {
       tarball { destination = "apache-${name}-${version.base}-src.tar.gz"
                 source      = destination }
       url     { download_path = "/$name/$name-${version.base}/"
+                site = "${apache.APACHE_MIRROR}/${download_path}"
+                archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
+    }
+    'hive2' {
+      name    = 'hive2'
+      relNotes = 'Apache Hive 2'
+      version { base = '2.3.0'; pkg = base; release = 1 }
+      tarball { destination = "apache-hive-${version.base}-src.tar.gz"
+                source      = destination }
+      url     { download_path = "/hive/hive-${version.base}/"
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
