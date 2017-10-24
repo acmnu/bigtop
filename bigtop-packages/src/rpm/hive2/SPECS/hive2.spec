@@ -32,6 +32,8 @@
 %define doc_hive2 %{_docdir}/%{name}
 %define alternatives_cmd update-alternatives
 
+%define _disable_jar_repacking 1
+
 %global initd_dir %{_sysconfdir}/rc.d
 
 Name: hive2
