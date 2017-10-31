@@ -1,0 +1,59 @@
+diff --git pom.xml pom.xml
+index ee26366..34c37ee 100644
+--- pom.xml
++++ pom.xml
+@@ -140,6 +140,7 @@
+                 <enabled>false</enabled>
+             </snapshots>
+         </repository>
++        <!--
+         <repository>
+             <id>Codehaus repository</id>
+             <url>http://repository.codehaus.org/</url>
+@@ -147,6 +148,7 @@
+                 <enabled>false</enabled>
+             </snapshots>
+         </repository>
++        -->
+         <repository>
+             <id>apache.snapshots.repo</id>
+             <url>https://repository.apache.org/content/groups/snapshots</url>
+@@ -1329,7 +1331,7 @@
+             <dependency>
+                 <groupId>commons-io</groupId>
+                 <artifactId>commons-io</artifactId>
+-                <version>2.1</version>
++                <version>2.4</version>
+             </dependency>
+ 
+             <dependency>
+@@ -1356,6 +1358,12 @@
+                 <version>${curator.version}</version>
+             </dependency>
+ 
++            <dependency>
++                <groupId>org.apache.curator</groupId>
++                <artifactId>curator-client</artifactId>
++                <version>${curator.version}</version>
++            </dependency>
++
+             <!-- examples -->
+             <dependency>
+                 <groupId>commons-httpclient</groupId>
+diff --git webapp/pom.xml webapp/pom.xml
+index 30fc7ff..bca2638 100644
+--- webapp/pom.xml
++++ webapp/pom.xml
+@@ -264,6 +264,12 @@
+                     <groupId>org.apache.hadoop</groupId>
+                     <artifactId>hadoop-client</artifactId>
+                     <scope>compile</scope>
++                    <exclusions>
++                        <exclusion>
++                            <groupId>javax.servlet.jsp</groupId>
++                            <artifactId>jsp-api</artifactId>
++                        </exclusion>
++                    </exclusions>
+                 </dependency>
+                 <dependency>
+                     <groupId>org.apache.oozie</groupId>
