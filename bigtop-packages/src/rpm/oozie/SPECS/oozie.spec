@@ -68,6 +68,7 @@ Source9: tomcat-deployment.sh
 Source10: oozie-site.xml
 Source11: bigtop.bom
 Source12: OOZIE-2396.patch
+Source13: jsp_remove.patch
 #BIGTOP_PATCH_FILES
 Requires(pre): /usr/sbin/groupadd, /usr/sbin/useradd
 Requires(post): /sbin/chkconfig
@@ -141,7 +142,8 @@ Requires: bigtop-utils >= 0.7
 #BIGTOP_PATCH_COMMANDS
 
 %build
-	patch --ignore-whitespace < %{SOURCE12}
+patch --ignore-whitespace < %{SOURCE12}
+patch -p0 --ignore-whitespace < %{SOURCE13}
     mkdir -p distro/downloads
     env DO_MAVEN_DEPLOY="" FULL_VERSION=%{oozie_base_version} bash -x %{SOURCE1}
 
@@ -211,6 +213,7 @@ fi
 %{lib_oozie}/bin/ooziedb.sh
 %{lib_oozie}/bin/oozie-setup.sh
 %{lib_oozie}/webapps
+%{lib_oozie}/oozie.war
 %{lib_oozie}/libtools
 %{lib_oozie}/lib
 %{lib_oozie}/oozie-sharelib.tar.gz
