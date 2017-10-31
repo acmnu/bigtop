@@ -165,6 +165,7 @@ bash $RPM_SOURCE_DIR/install_spark.sh \
 %__ln_s  %{lib_hadoop_client}/hadoop-client.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
 %__ln_s  %{lib_hadoop_client}/hadoop-common.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
 %__ln_s  %{lib_hadoop_client}/hadoop-hdfs.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
+%__ln_s  %{lib_hadoop_client}/hadoop-hdfs-client.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
 %__ln_s  %{lib_hadoop_client}/hadoop-mapreduce-client-app.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
 %__ln_s  %{lib_hadoop_client}/hadoop-mapreduce-client-common.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
 %__ln_s  %{lib_hadoop_client}/hadoop-mapreduce-client-core.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/

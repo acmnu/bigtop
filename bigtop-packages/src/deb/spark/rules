@@ -56,6 +56,7 @@ override_dh_install:
 	ln -s  ${lib_hadoop_client}/hadoop-client.jar debian/tmp/${lib_spark}/jars/
 	ln -s  ${lib_hadoop_client}/hadoop-common.jar debian/tmp/${lib_spark}/jars/
 	ln -s  ${lib_hadoop_client}/hadoop-hdfs.jar debian/tmp/${lib_spark}/jars/
+	ln -s  ${lib_hadoop_client}/hadoop-hdfs-client.jar debian/tmp/${lib_spark}/jars/
 	ln -s  ${lib_hadoop_client}/hadoop-mapreduce-client-app.jar debian/tmp/${lib_spark}/jars/
 	ln -s  ${lib_hadoop_client}/hadoop-mapreduce-client-common.jar debian/tmp/${lib_spark}/jars/
 	ln -s  ${lib_hadoop_client}/hadoop-mapreduce-client-core.jar debian/tmp/${lib_spark}/jars/
