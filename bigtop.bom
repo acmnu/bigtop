@@ -475,7 +475,7 @@ bigtop {
       version { base = '0.8.1'; pkg = base; release = 1 }
       tarball { source      = "apache-$name-${version.base}-sources.tar.gz"
                 destination = "$name-${version.base}.tar.gz" }
-      url     { download_path = "/$name/apache-$name-core-${version.base}/"
+      url     { download_path = "/$name/${version.base}/"
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
