@@ -8,7 +8,7 @@ Summary:	atlas
 Group:		Application/Server
 License:	Apache License, Version 2.0
 URL:		  http://atlas.incubator.apache.org/
-Source0:	apache-atlas-%{atlas_version}-sources.tar.gz
+Source0:	atlas-%{atlas_version}.tar.gz
 Source1:  do-component-build
 Source2:  install_atlas.sh
 #Patch0:   ATLAS-2157.patch
