@@ -187,10 +187,10 @@ bigtop {
     'hive' {
       name    = 'hive'
       relNotes = 'Apache Hive'
-      version { base = '1.2.1'; pkg = base; release = 1 }
-      tarball { destination = "apache-${name}-${version.base}-src.tar.gz"
+      version { base = '2.3.0'; pkg = base; release = 1 }
+      tarball { destination = "apache-hive-${version.base}-src.tar.gz"
                 source      = destination }
-      url     { download_path = "/$name/$name-${version.base}/"
+      url     { download_path = "/hive/hive-${version.base}/"
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
@@ -490,7 +490,7 @@ bigtop {
     'ambari' {
       name    = 'ambari'
       relNotes = 'Apache Ambari'
-      version { base = '2.5.0'; pkg = '2.5.0.0'; release = 1 }
+      version { base = '2.5.2'; pkg = '2.5.2.0'; release = 1 }
       tarball { destination = "apache-$name-${version.base}-src.tar.gz"
                 source      = destination }
       url     { download_path = "/$name/$name-${version.base}/"

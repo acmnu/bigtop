@@ -1,0 +1,121 @@
+From 43fe67ee04ce0cd8cd2da6f19f829f1f9d5eba48 Mon Sep 17 00:00:00 2001
+From: Anton Chevychalov <cab@arenadata.io>
+Date: Fri, 20 Oct 2017 15:28:03 +0300
+Subject: [PATCH] ADH-199 Fix maven: unable to resolve org.apache.directory
+
+---
+ service/pom.xml | 91 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 91 insertions(+)
+
+diff --git a/service/pom.xml b/service/pom.xml
+index 36199a1..bff1b2b 100644
+--- a/service/pom.xml
++++ b/service/pom.xml
+@@ -29,6 +29,8 @@
+ 
+   <properties>
+     <hive.path.to.root>..</hive.path.to.root>
++    <apache-directory-server.version>1.5.6</apache-directory-server.version>
++    <apache-directory-clientapi.version>0.1</apache-directory-clientapi.version>
+   </properties>
+ 
+   <dependencies>
+@@ -190,6 +192,95 @@
+       <version>${apache-directory-server.version}</version>
+       <scope>test</scope>
+     </dependency>
++
++    <dependency>
++      <groupId>org.apache.directory.server</groupId>
++      <artifactId>apacheds-test-framework</artifactId>
++      <version>${apache-directory-server.version}</version>
++      <scope>test</scope>
++    </dependency>
++
++    <dependency>
++      <groupId>org.apache.directory.shared</groupId>
++      <artifactId>shared-i18n</artifactId>
++      <version>1.0.0-M9</version>
++      <scope>test</scope>
++    </dependency>
++
++	<dependency>
++	  <groupId>org.apache.directory.server</groupId>
++	  <artifactId>apacheds-interceptor-kerberos</artifactId>
++	  <version>${apache-directory-server.version}</version>
++	  <scope>test</scope>
++	</dependency>
++	<dependency>
++	  <groupId>org.apache.directory.server</groupId>
++	  <artifactId>apacheds-core-integ</artifactId>
++	  <version>${apache-directory-server.version}</version>
++	  <scope>test</scope>
++	</dependency>
++	<dependency>
++	  <groupId>org.apache.directory.server</groupId>
++	  <artifactId>apacheds-i18n</artifactId>
++	  <version>${apache-directory-server.version}</version>
++	  <scope>test</scope>
++	</dependency>
++	<dependency>
++	  <groupId>org.apache.directory.server</groupId>
++	  <artifactId>apacheds-server-annotations</artifactId>
++	  <version>${apache-directory-server.version}</version>
++	  <scope>test</scope>
++	</dependency>
++	<dependency>
++	  <groupId>org.apache.directory.server</groupId>
++	  <artifactId>apacheds-core</artifactId>
++	  <version>${apache-directory-server.version}</version>
++	  <scope>test</scope>
++	</dependency>
++	<dependency>
++	  <groupId>org.apache.directory.server</groupId>
++	  <artifactId>apacheds-kerberos-shared</artifactId>
++	  <version>${apache-directory-server.version}</version>
++	  <scope>test</scope>
++	</dependency>
++	<dependency>
++	  <groupId>org.apache.directory.server</groupId>
++	  <artifactId>apacheds-core-annotations</artifactId>
++	  <version>${apache-directory-server.version}</version>
++	  <scope>test</scope>
++	</dependency>
++	<dependency>
++	  <groupId>org.apache.directory.server</groupId>
++	  <artifactId>apacheds-protocol-ldap</artifactId>
++	  <version>${apache-directory-server.version}</version>
++	  <scope>test</scope>
++	</dependency>
++	<dependency>
++	  <groupId>org.apache.directory.server</groupId>
++	  <artifactId>apacheds-protocol-kerberos</artifactId>
++	  <version>${apache-directory-server.version}</version>
++	  <scope>test</scope>
++	</dependency>
++
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-core-api        </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-utils           </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-core-jndi       </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-protocol-shared </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-jdbm-partition  </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-ldif-partition  </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-xdbm-tools      </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-core-entry     </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-core-constants </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-jdbm-store     </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-xdbm-search    </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-avl-partition  </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-core-mock      </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-xdbm-base      </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-jdbm    </artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++	<dependency><groupId>org.apache.directory.server</groupId><artifactId>apacheds-core-avl</artifactId><version>${apache-directory-server.version}</version><scope>test</scope></dependency>
++
++
+   </dependencies>
+ 
+   <build>
+-- 
+2.7.4
+
