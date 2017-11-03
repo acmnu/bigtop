@@ -11,7 +11,7 @@ URL:		  http://atlas.incubator.apache.org/
 Source0:	atlas-%{atlas_version}.tar.gz
 Source1:  do-component-build
 Source2:  install_atlas.sh
-#Patch0:   ATLAS-2157.patch
+#BIGTOP_PATCH_FILES
 
 BuildArch:  x86_64
 Requires:	bash
@@ -23,7 +23,7 @@ Atlas is a scalable and extensible set of core foundational governance services 
 
 %prep
 %setup -q -n apache-atlas-sources-%{atlas_version}
-#%patch0 -p1
+#BIGTOP_PATCH_COMMANDS
 
 %build
 bash %{SOURCE1}
