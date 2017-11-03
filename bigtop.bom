@@ -478,6 +478,7 @@ bigtop {
       url     { download_path = "/$name/${version.base}/"
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
+      pkg = "atlas-metadata"
     }
     'qfs' {
       name    = 'qfs'
