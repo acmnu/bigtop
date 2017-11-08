@@ -159,6 +159,7 @@ env DO_MAVEN_DEPLOY="" FULL_VERSION=%{oozie_base_version} bash -x %{SOURCE1}
 %__ln_s -f %{lib_hadoop}/client/hadoop-auth.jar $RPM_BUILD_ROOT/%{lib_oozie}/lib/
 %__ln_s -f %{lib_hadoop}/client/hadoop-common.jar $RPM_BUILD_ROOT/%{lib_oozie}/lib/
 %__ln_s -f %{lib_hadoop}/client/hadoop-hdfs.jar $RPM_BUILD_ROOT/%{lib_oozie}/lib/
+%__ln_s -f %{lib_hadoop}/client/hadoop-hdfs-client.jar $RPM_BUILD_ROOT/%{lib_oozie}/lib/
 %__ln_s -f %{lib_hadoop}/client/hadoop-mapreduce-client-app.jar $RPM_BUILD_ROOT/%{lib_oozie}/lib/
 %__ln_s -f %{lib_hadoop}/client/hadoop-mapreduce-client-common.jar $RPM_BUILD_ROOT/%{lib_oozie}/lib/
 %__ln_s -f %{lib_hadoop}/client/hadoop-mapreduce-client-core.jar $RPM_BUILD_ROOT/%{lib_oozie}/lib/
