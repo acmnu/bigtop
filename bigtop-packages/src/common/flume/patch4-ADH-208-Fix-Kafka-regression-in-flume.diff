@@ -1,0 +1,27 @@
+From 9e29f37db8e2cf36bfb67d9bc23b7573838b064b Mon Sep 17 00:00:00 2001
+From: Anton Chevychalov <cab@arenadata.io>
+Date: Thu, 9 Nov 2017 11:52:59 +0300
+Subject: [PATCH 2/2] ADH-208 Fix Kafka regression in flume
+
+There is a change in package naming. For addtional information
+see 5383f9bed0ec4fda86b74a94d9d1ba595a2a1c8a in Kafka repo.
+---
+ .../src/main/java/org/apache/flume/source/kafka/KafkaSource.java        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/flume-ng-sources/flume-kafka-source/src/main/java/org/apache/flume/source/kafka/KafkaSource.java b/flume-ng-sources/flume-kafka-source/src/main/java/org/apache/flume/source/kafka/KafkaSource.java
+index 960e9e8..8e004cb 100644
+--- a/flume-ng-sources/flume-kafka-source/src/main/java/org/apache/flume/source/kafka/KafkaSource.java
++++ b/flume-ng-sources/flume-kafka-source/src/main/java/org/apache/flume/source/kafka/KafkaSource.java
+@@ -60,7 +60,7 @@ import org.apache.kafka.clients.consumer.OffsetAndMetadata;
+ import org.apache.kafka.common.PartitionInfo;
+ import org.apache.kafka.common.TopicPartition;
+ import org.apache.kafka.common.network.ListenerName;
+-import org.apache.kafka.common.protocol.SecurityProtocol;
++import org.apache.kafka.common.security.auth.SecurityProtocol;
+ import org.apache.kafka.common.security.JaasUtils;
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
+-- 
+2.7.4
+
