@@ -90,3 +90,26 @@ tar xf "${BUILD_DIR}/apache-hive-${VERSION}-src/packaging/target/apache-hive-${V
 
 mv apache-hive-2.3.0-bin hive
 
+BIN_DIR=$PREFIX/usr/bin
+INSTALLED_HIVE_DIR=$PREFIX/usr/lib/hive
+
+install -d -m 0755 ${BIN_DIR}
+for file in hive beeline hiveserver2
+do
+  wrapper=$BIN_DIR/$file
+  cat >>$wrapper <<EOF
+#!/bin/bash
+
+# Autodetect JAVA_HOME if not defined
+if [ -e /usr/lib/bigtop-utils/bigtop-detect-javahome ]; then
+  . /usr/lib/bigtop-utils/bigtop-detect-javahome
+fi
+
+BIGTOP_DEFAULTS_DIR=\${BIGTOP_DEFAULTS_DIR-/etc/default}
+[ -n "\${BIGTOP_DEFAULTS_DIR}" -a -r \${BIGTOP_DEFAULTS_DIR}/hbase ] && . \${BIGTOP_DEFAULTS_DIR}/hbase
+
+export HIVE_HOME=$INSTALLED_HIVE_DIR
+exec $INSTALLED_HIVE_DIR/bin/$file "\$@"
+EOF
+  chmod 755 $wrapper
+done
