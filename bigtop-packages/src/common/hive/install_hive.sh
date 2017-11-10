@@ -91,7 +91,7 @@ tar xf "${BUILD_DIR}/apache-hive-${VERSION}-src/packaging/target/apache-hive-${V
 mv apache-hive-2.3.0-bin hive
 
 BIN_DIR=$PREFIX/usr/bin
-INSTALLED_HIVE_DIR=$PREFIX/usr/lib/hive
+INSTALLED_HIVE_DIR=/usr/lib/hive
 
 install -d -m 0755 ${BIN_DIR}
 for file in hive beeline hiveserver2
