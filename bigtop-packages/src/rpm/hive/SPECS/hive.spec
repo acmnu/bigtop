@@ -93,4 +93,6 @@ getent passwd hive >/dev/null || useradd -c "Hive" -s /sbin/nologin -g hive -r -
 /usr/bin/hcat
 /usr/bin/hive
 /usr/bin/hiveserver2
+%config /etc/hive
+
 
