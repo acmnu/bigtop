@@ -89,4 +89,8 @@ getent passwd hive >/dev/null || useradd -c "Hive" -s /sbin/nologin -g hive -r -
 #######################
 %files
 %{usr_lib_hive}
-/usr/bin
+/usr/bin/beeline
+/usr/bin/hcat
+/usr/bin/hive
+/usr/bin/hiveserver2
+
