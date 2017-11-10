@@ -90,6 +90,14 @@ tar xf "${BUILD_DIR}/apache-hive-${VERSION}-src/packaging/target/apache-hive-${V
 
 mv apache-hive-2.3.0-bin hive
 
+CONF_DIR=/etc/hive
+CONF_DIST_DIR=/etc/hive/conf.dist
+
+install -d -m 0755 $PREFIX/etc/hive
+install -d -m 0755 $PREFIX/etc/hive/conf
+mv $PREFIX/usr/lib/hive/conf $PREFIX/etc/hive/conf.dist
+ln -sfn /etc/hive/conf $PREFIX/usr/lib/hive/conf
+
 BIN_DIR=$PREFIX/usr/bin
 INSTALLED_HIVE_DIR=/usr/lib/hive
 INSTALLED_HCATALOG_DIR=${INSTALLED_HCATALOG_DIR:-/usr/lib/hive/hcatalog}
