@@ -92,6 +92,7 @@ mv apache-hive-2.3.0-bin hive
 
 BIN_DIR=$PREFIX/usr/bin
 INSTALLED_HIVE_DIR=/usr/lib/hive
+INSTALLED_HCATALOG_DIR=${INSTALLED_HCATALOG_DIR:-/usr/lib/hive/hcatalog}
 
 install -d -m 0755 ${BIN_DIR}
 for file in hive beeline hiveserver2
@@ -113,3 +114,26 @@ exec $INSTALLED_HIVE_DIR/bin/$file "\$@"
 EOF
   chmod 755 $wrapper
 done
+
+wrapper=$BIN_DIR/hcat
+cat >>$wrapper <<EOF
+#!/bin/sh
+
+BIGTOP_DEFAULTS_DIR=${BIGTOP_DEFAULTS_DIR-/etc/default}
+[ -n "${BIGTOP_DEFAULTS_DIR}" -a -r ${BIGTOP_DEFAULTS_DIR}/hadoop ] && . ${BIGTOP_DEFAULTS_DIR}/hadoop
+
+# Autodetect JAVA_HOME if not defined
+if [ -e /usr/lib/bigtop-utils/bigtop-detect-javahome ]; then
+  . /usr/lib/bigtop-utils/bigtop-detect-javahome
+fi
+
+# FIXME: HCATALOG-636 (and also HIVE-2757)
+export HIVE_HOME=/usr/lib/hive
+export HIVE_CONF_DIR=/etc/hive/conf
+export HCAT_HOME=$INSTALLED_HCATALOG_DIR
+
+export HCATALOG_HOME=$INSTALLED_HCATALOG_DIR
+exec $INSTALLED_HCATALOG_DIR/bin/hcat "\$@"
+EOF
+chmod 755 $wrapper
+
