@@ -66,7 +66,7 @@ class bigtop_toolchain::jdk {
         }
       }
     }
-    /OpenSuSE/: {
+    /OpenSuSE|SLES/: {
       package { 'java-1_8_0-openjdk-devel' :
         ensure => present
       }
