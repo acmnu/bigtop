@@ -34,7 +34,7 @@ class bigtop_toolchain::env {
          'ppc64le' : { $javahome = "/usr/lib/jvm/${java}-openjdk" }
        }
     }
-    'OpenSuSE' : {
+    'OpenSuSE','SLES': {
       $javahome = "/usr/lib64/jvm/${java}-openjdk-${java_version}"
     }
   }
