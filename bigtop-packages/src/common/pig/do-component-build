@@ -21,7 +21,7 @@ set -ex
 cat <<__EOT__ >> ivy/libraries.properties
 
 hbase95.version=$HBASE_VERSION
-hive.version=$HIVE_VERSION
+hive.version="1.2.0"
 zookeeper.version=$ZOOKEEPER_VERSION
 hadoop-common.version=$HADOOP_VERSION
 hadoop-hdfs.version=$HADOOP_VERSION
