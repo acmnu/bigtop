@@ -76,6 +76,7 @@ Requires(pre): /usr/sbin/groupadd, /usr/sbin/useradd
 Requires(post): /sbin/chkconfig
 Requires(preun): /sbin/chkconfig, /sbin/service
 Requires: oozie-client = %{version}, hadoop-client, bigtop-tomcat
+AutoReq: no
 BuildArch: noarch
 
 %description
@@ -126,6 +127,7 @@ Group: Development/Libraries
 License: ASL 2.0
 BuildArch: noarch
 Requires: bigtop-utils >= 0.7
+AutoReq: no
 
 
 %description client
