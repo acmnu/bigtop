@@ -22,8 +22,7 @@
 %define lib_hadoop /usr/lib/hadoop
 
 # disable repacking jars
-%define __os_install_post %{nil}
-%define __jar_repack ${nil}
+%define __jar_repack 0
 
 %if  %{!?suse_version:1}0
   %define doc_oozie %{_docdir}/oozie-%{oozie_version}
