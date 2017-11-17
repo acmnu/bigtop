@@ -21,6 +21,10 @@
 %define data_oozie /var/lib/oozie
 %define lib_hadoop /usr/lib/hadoop
 
+# disable repacking jars
+%define __os_install_post %{nil}
+%define __jar_repack ${nil}
+
 %if  %{!?suse_version:1}0
   %define doc_oozie %{_docdir}/oozie-%{oozie_version}
   %define initd_dir %{_sysconfdir}/rc.d/init.d
