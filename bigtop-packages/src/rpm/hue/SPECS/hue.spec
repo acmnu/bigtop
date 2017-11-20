@@ -190,11 +190,11 @@ BuildRequires: asciidoc
 BuildRequires: gmp-devel
 BuildRequires: libffi-devel
 Group: Applications/Engineering
-Requires: cyrus-sasl-gssapi, libxml2, libxslt, zlib, sqlite, libyaml, python
+Requires: cyrus-sasl-gssapi, libxml2, libxslt, zlib, sqlite, python
 %if 0%{?suse_version}
-Requires: libgmp10, libffi4
+Requires: libgmp10, libffi4, libyaml-0-2
 %else
-Requires: gmp, libffi
+Requires: gmp, libffi, libyaml
 %endif
 # The only reason we need the following is because we also have AutoProv: no
 Provides: config(%{name}-common) = %{version}
