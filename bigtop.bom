@@ -111,7 +111,7 @@ bigtop {
   dependencies = [
     zookeeper:['hadoop', 'hbase'],
     hadoop:['ignite-hadoop', 'hbase', 'crunch', 'pig', 'hive', 'tez', 'sqoop', 'sqoop2',
-      'oozie', 'mahout', 'flume', 'giraph', 'solr', 'spark','spark1',
+      'oozie', 'extjs', 'mahout', 'flume', 'giraph', 'solr', 'spark','spark1',
       'phoenix', 'alluxio', 'kafka', 'ycsb', 'kite', 'hama', 'zeppelin',
       'tajo', 'apex', 'atlas'
     ],
@@ -233,6 +233,16 @@ bigtop {
       url     { download_path = "/$name/${version.base}/"
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
+    }
+    'extjs' {
+      name    = 'extjs'
+      relNotes = 'ExtJS Framework'
+      version { base = '2.2'; pkg = base; release = 1 }
+      tarball { destination = "ext-${version.base}.zip"
+                source      = destination }
+      url     { download_path = "/gplextras/misc/"
+                site = "http://archive.cloudera.com/${download_path}"
+                archive = "http://archive.cloudera.com/${download_path}" }
     }
     'mahout' {
       name    = 'mahout'
