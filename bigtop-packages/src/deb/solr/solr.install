@@ -1,3 +1,4 @@
 /etc/default
+/etc/solr/conf
 /usr/lib/solr
 /var

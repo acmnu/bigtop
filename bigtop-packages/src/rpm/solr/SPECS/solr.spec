@@ -157,6 +157,7 @@ fi
 %files 
 %defattr(-,root,root,755)
 %config(noreplace) /etc/default/solr 
+%config(noreplace) /etc/solr/conf
 %{lib_solr}
 %defattr(-,solr,solr,755)
 /var/lib/solr
