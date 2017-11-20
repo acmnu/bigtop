@@ -145,6 +145,9 @@ install -d -m 0755 $VAR_DIR/log/solr
 install -d -m 0755 $VAR_DIR/run/solr
 install -d -m 0755 $VAR_DIR/lib/solr
 
+# make default config dir
+install -d -m 0755 $PREFIX/etc/solr/conf
+
 # setup solr-home
 cp -a ${BUILD_DIR}/example/resources/log4j.properties $VAR_DIR/lib/solr
 cp -a ${BUILD_DIR}/server/solr/solr.xml $VAR_DIR/lib/solr
