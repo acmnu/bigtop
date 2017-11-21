@@ -25,11 +25,11 @@ atlas_dir="${prefix}/usr/lib/atlas-server"
 etc_dir="${prefix}/etc/atlas"
 
 install -d -m 0755 "${prefix}/usr/lib/"
-install -d -m 0755 "${etc_dir}/conf"
 install -d -m 0755 "${prefix}/var/log/atlas"
 
 tar xf "distro/target/apache-atlas-${version}-bin.tar.gz" -C "${prefix}/usr/lib/"
 mv "${prefix}/usr/lib/apache-atlas-${version}" "${atlas_dir}"
-mv "${atlas_dir}/conf" "${etc_dir}/conf.dist"
+mv "${atlas_dir}/conf" "${etc_dir}/conf"
+cp -r "${etc_dir}/conf" "${etc_dir}/conf.dist"
 
 ln -nsf "/etc/atlas/conf" "${atlas_dir}/conf"
