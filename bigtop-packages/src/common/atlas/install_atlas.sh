@@ -25,6 +25,7 @@ atlas_dir="${prefix}/usr/lib/atlas-server"
 etc_dir="${prefix}/etc/atlas"
 
 install -d -m 0755 "${prefix}/usr/lib/"
+install -d -m 0755 "${etc_dir}"
 install -d -m 0755 "${prefix}/var/log/atlas"
 
 tar xf "distro/target/apache-atlas-${version}-bin.tar.gz" -C "${prefix}/usr/lib/"
