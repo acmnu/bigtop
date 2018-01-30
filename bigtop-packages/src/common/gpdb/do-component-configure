@@ -43,4 +43,5 @@ cd ../..
 export LD_LIBRARY_PATH=$2/$1/lib:$LD_LIBRARY_PATH
 
 cd ..
+export BUILDNUMBER="${3}-arenadata-${4}"
 ./configure --prefix=$1 --with-includes=$2/$1/include --with-libraries=$2/$1/lib --with-python --with-perl

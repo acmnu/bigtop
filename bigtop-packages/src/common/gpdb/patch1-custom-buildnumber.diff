@@ -1,0 +1,26 @@
+From a0fa15e702204eb503673a4d5c56ee23f326036d Mon Sep 17 00:00:00 2001
+From: Anton Chevychalov <cab@arenadata.io>
+Date: Tue, 30 Jan 2018 12:56:33 +0300
+Subject: [PATCH] ADB-11 Support custom build number
+
+---
+ getversion | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/getversion b/getversion
+index 99d5057..ded4f3b 100755
+--- a/getversion
++++ b/getversion
+@@ -5,7 +5,8 @@
+ pushd $(dirname "$0") > /dev/null
+ 
+ VERSION=$(perl -e 'while(<>){print $1 if (/^PACKAGE_VERSION='\''(.+)'\''$/)}' < configure)
+-BUILDNUMBER=dev
++BUILDNUMBER=${BUILDNUMBER:-dev}
++
+ 
+ # Call git describe, and convert it to a semi-semantic version, like
+ # 5.0.0-alpha.0+dev.52.g123abc
+-- 
+2.7.4
+

@@ -52,7 +52,7 @@ gpdb
 
 %install
 %__rm -rf $RPM_BUILD_ROOT
-bash %{SOURCE3} %{bin_gpdb} %{_tmppath}
+bash %{SOURCE3} %{bin_gpdb} %{_tmppath} %{gpdb_base_version} %{gpdb_release}
 bash %{SOURCE1}
 bash %{SOURCE2} %{_tmppath}
 mkdir -p $RPM_BUILD_ROOT%{bin_gpdb}
