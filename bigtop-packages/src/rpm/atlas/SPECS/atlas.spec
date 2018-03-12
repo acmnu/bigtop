@@ -13,7 +13,7 @@ Source1:  do-component-build
 Source2:  install_atlas.sh
 #BIGTOP_PATCH_FILES
 
-BuildArch:  x86_64
+BuildArch:  noarch
 Requires:	bash
 Provides: 	atlas
 AutoReqProv: 	no
