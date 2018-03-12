@@ -11,7 +11,7 @@ Group:		Application/Server
 License:	Apache License, Version 2.0
 URL:		  http://extjs.incubator.apache.org/
 Source0:	ext-%{extjs_version}.zip
-BuildArch:  x86_64
+BuildArch:  noarch
 Requires:	bash
 Provides: 	extjs
 AutoReqProv: 	no
