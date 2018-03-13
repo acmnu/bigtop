@@ -69,7 +69,7 @@ class bigtop_toolchain::packages {
         "bison",
         "perl-Env",
         "libffi-devel",
-        "protoc"
+        "protobuf-compiler"
       ]
     }
     /(?i:(SLES|opensuse))/: { $pkgs = [
