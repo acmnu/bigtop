@@ -24,7 +24,17 @@ unzip v3.1.2-p1.zip
 cd gp-xerces-3.1.2-p1/
 mkdir build
 cd build
-../configure --prefix=$1
+../configure --enable-pxf \
+             --enable-gpperfmon \
+             --enable-orca \
+             --with-python \
+             --with-gssapi \
+             --with-krb5 \
+             --with-ldap \
+             --with-openssl \
+             --with-libxml \
+             --with-libxslt \
+             --prefix=$1
 make
 make install DESTDIR=$2
 cd ../..
@@ -37,11 +47,21 @@ mkdir build
 cd build
 
 cmake -GNinja -DXERCES_INCLUDE_DIR=$2/$1/include -DXERCES_LIBRARY=$2/$1/lib/libxerces-c-3.1.so -DCMAKE_INSTALL_PREFIX=$1 ../
-DESTDIR=$2 ninja-build install 
+DESTDIR=$2 ninja-build install
 cd ../..
 
 export LD_LIBRARY_PATH=$2/$1/lib:$LD_LIBRARY_PATH
 
 cd ..
 export BUILDNUMBER="${3}-arenadata-${4}"
-./configure --prefix=$1 --with-includes=$2/$1/include --with-libraries=$2/$1/lib --with-python --with-perl
+./configure --enable-pxf \
+            --enable-gpperfmon \
+            --enable-orca \
+            --with-python \
+            --with-gssapi \
+            --with-krb5 \
+            --with-ldap \
+            --with-openssl \
+            --with-libxml \
+            --with-libxslt \
+            --prefix=$1 --with-includes=$2/$1/include --with-libraries=$2/$1/lib --with-python --with-perl
