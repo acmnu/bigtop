@@ -98,6 +98,12 @@ install -d -m 0755 $PREFIX/etc/hive/conf
 mv $PREFIX/usr/lib/hive/conf $PREFIX/etc/hive/conf.dist
 ln -sfn /etc/hive/conf $PREFIX/usr/lib/hive/conf
 
+for module in webhcat hcatalog; do
+    install -d -m 0755 $PREFIX/etc/hive-$module
+    mv $PREFIX/usr/lib/hive/hcatalog/etc/$module $PREFIX/etc/hive-$module/conf
+    ln -sfn /etc/hive-$module/conf $PREFIX/usr/lib/hive/hcatalog/etc/$module
+done
+
 BIN_DIR=$PREFIX/usr/bin
 INSTALLED_HIVE_DIR=/usr/lib/hive
 INSTALLED_HCATALOG_DIR=${INSTALLED_HCATALOG_DIR:-/usr/lib/hive/hcatalog}
