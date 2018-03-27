@@ -44,7 +44,7 @@
      APACHE_MIRROR = "http://apache.osuosl.org"
      APACHE_ARCHIVE = "https://archive.apache.org/dist"
    }
-   git { // *optional* This is a global setting to access protected git repositories, 
+   git { // *optional* This is a global setting to access protected git repositories,
          //            can be specified per component as well
      user = "john_doe"
      token = "john's access token"
@@ -472,7 +472,7 @@ bigtop {
     'gpdb' {
       name    = 'gpdb'
       relNotes = 'GreenPlum'
-      version { base = '5.5.0'; pkg = '5.5.0'; release = 1 }
+      version { base = '5.6.1'; pkg = '5.6.1'; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "${version.base}.tar.gz" }
       url     { site = "https://github.com/greenplum-db/gpdb/archive/"
