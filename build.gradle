@@ -156,7 +156,7 @@ allprojects {
   targetCompatibility = langLevel
 
   repositories {
-    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "https://ci.arenadata.io/artifactory/maven-apache/" }
     mavenCentral()
   }
 }
@@ -380,11 +380,11 @@ def generate_nexus_tasks = { name, url, snapshot ->
   }
 }
 
-def repos = [ [ "name": "conjars", "url" : "http://conjars.org", 'snapshot':'RELEASE'],
-          [ "name": "repository.jboss.org", "url": "http://repository.jboss.org/nexus/content/groups/public/", 'snapshot': 'RELEASE'],
-          [ "name": "apache.snapshots.https", "url": "https://repository.apache.org/content/repositories/snapshots", "snapshot": 'SNAPSHOT'],
-          [ "name": "apache.snapshots", "url": "https://repository.apache.org/content/repositories/snapshots", "snapshot": 'SNAPSHOT'],
-          [ "name": "maven2-repository.atlassian", "url": "https://maven.atlassian.com/repository/public", "snapshot": 'RELASE']]
+def repos = [ [ "name": "conjars", "url" : "https://ci.arenadata.io/artifactory/maven-conjars/", 'snapshot':'RELEASE'],
+          [ "name": "repository.jboss.org", "url": "https://ci.arenadata.io/artifactory/maven-jboss/", 'snapshot': 'RELEASE'],
+          [ "name": "apache.snapshots.https", "url": "https://ci.arenadata.io/artifactory/maven-apache-snapshots/", "snapshot": 'SNAPSHOT'],
+          [ "name": "apache.snapshots", "url": "https://ci.arenadata.io/artifactory/maven-apache-snapshots/", "snapshot": 'SNAPSHOT'],
+          [ "name": "maven2-repository.atlassian", "url": "https://ci.arenadata.io/artifactory/maven-atlassian/", "snapshot": 'RELASE']]
 
 repos.each { r->
   generate_nexus_tasks( r.name, r.url, r.snapshot)
