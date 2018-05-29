@@ -35,6 +35,14 @@ final boolean buildDependencies = false || System.getProperty(DEPS_BUILD) == 'tr
 final String BOM = System.getProperty('bomfile') ?: "$rootDir/bigtop.bom"
 def final config  = new ConfigSlurper().parse(new URL("file:$BOM"))
 
+// GPDB Hack
+config.bigtop.components.gpdb.version.base = System.getenv('GPDB_VERSION_BASE') ?: config.bigtop.components.gpdb.version.base
+
+config.bigtop.components.gpdb.tarball.destination =  "gpdb-" + config.bigtop.components.gpdb.version.base + ".tar.gz"
+config.bigtop.components.gpdb.tarball.source = config.bigtop.components.gpdb.tarball.destination
+config.bigtop.components.gpdb.git.ref = System.getenv('GPDB_GIT_REF') ?: config.bigtop.components.gpdb.git.ref
+// End Of GPDB Hack
+
 config.bigtop.builddir = projectDir.absolutePath + "/build"
 config.bigtop.outputdir = projectDir.absolutePath + "/output"
 config.bigtop.distdir = projectDir.absolutePath + "/dist"
@@ -181,6 +189,7 @@ def genTasks = { target ->
 
     def final GIT_REPO = config.bigtop.components[target].git.repo
     def final GIT_REF = config.bigtop.components[target].git.ref
+
     def final GIT_DIR = config.bigtop.components[target].git.dir
     def final GIT_USER_NAME = config.bigtop.components[target].git.user ?: config.bigtop.git.user
     def final GIT_ACCESS_TOKEN = config.bigtop.components[target].git.token ?: config.bigtop.git.token
@@ -212,27 +221,50 @@ def genTasks = { target ->
         exec {
           workingDir DL_DIR
           commandLine "git clone --depth 1 --branch $GIT_REF ${uri} ${dir}".split()
-          errorOutput devNull
-          standardOutput devNull
+     //     errorOutput devNull
+      //    standardOutput devNull
         }
       } else {
+        println ("git clone --depth 1 --branch $GIT_REF ${GIT_REPO} ${dir}");
         exec {
           workingDir DL_DIR
           commandLine "git clone --depth 1 --branch $GIT_REF ${GIT_REPO} ${dir}".split()
-          errorOutput devNull
-          standardOutput devNull
+       //   errorOutput devNull
+       //   standardOutput devNull
+        }
+        exec {
+            workingDir DL_DIR
+            commandLine "find .".split()
         }
       }
       exec {
         workingDir "$DL_DIR/${dir}"
         commandLine "git submodule update --init".split()
-        errorOutput devNull
-        standardOutput devNull
+        //errorOutput devNull
+        //standardOutput devNull
       }
+        exec {
+            workingDir DL_DIR
+            commandLine "find .".split()
+        }
       delete("${DL_DIR}/${dir}/.git")
+        exec {
+            workingDir DL_DIR
+            commandLine "find .".split()
+        }
       exec {
         workingDir DL_DIR
-        commandLine "tar -czf ${TARBALL_DST} ${dir}".split()
+        commandLine "tar -czvf ${TARBALL_DST} ${dir}".split()
+      }
+
+        exec {
+            workingDir DL_DIR
+            commandLine "find .".split()
+        }
+
+      exec {
+        workingDir DL_DIR
+        commandLine "tar -tf ${TARBALL_DST}".split()
       }
       delete("${DL_DIR}/${dir}")
     }

@@ -472,11 +472,9 @@ bigtop {
     'gpdb' {
       name    = 'gpdb'
       relNotes = 'GreenPlum'
-      version { base = '5.8.0_arenadata1'; pkg = base; release = 1 }
-      tarball { destination = "${name}-${version.base}.tar.gz"
-                source      = "${version.base}.tar.gz" }
-      url     { site = "https://github.com/arenadata/gpdb/archive/"
-                archive = site }
+      version { base="xxx" ;pkg = base; release = 1 }
+      tarball { destination = "${name}-${version.base}.tar.gz" }
+      git     { repo = "git@github.com:arenadata/gpdb.git"}
     }
     'ambari' {
       name    = 'ambari'
