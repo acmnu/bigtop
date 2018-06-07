@@ -472,9 +472,11 @@ bigtop {
     'gpdb' {
       name    = 'gpdb'
       relNotes = 'GreenPlum'
-      version { base = '5.8.0_arenadata1'; pkg = base; release = 1 }
+      version { base = System.getenv('GPDB_VERSION') ?: '5.8.0_next'
+               pkg = base
+               release = 1 }
       tarball { destination = "${name}-${version.base}.tar.gz"
-                source      = "${version.base}.tar.gz" }
+                source      = System.getenv('GPDB_BRANCH') + ".zip" ?: "${version.base}.zip" }
       url     { site = "https://github.com/arenadata/gpdb/archive/"
                 archive = site }
     }
