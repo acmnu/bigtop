@@ -18,10 +18,11 @@ set -ex
 
 mkdir  -p add_libs
 cd add_libs
-wget https://github.com/greenplum-db/gp-xerces/archive/v3.1.2-p1.zip
-unzip v3.1.2-p1.zip
+xerca_ver=adb-5.x
+wget https://github.com/greenplum-db/gp-xerces/archive/${xerca_ver}.zip
+unzip ${xerca_ver}.zip
 
-cd gp-xerces-3.1.2-p1/
+cd gp-xerces-${xerca_ver}
 mkdir build
 cd build
 ../configure --prefix=$1
@@ -29,9 +30,9 @@ make
 make install DESTDIR=$2
 cd ../..
 
-orca_ver=2.56.3
-wget https://github.com/greenplum-db/gporca/archive/v${orca_ver}.zip
-unzip v${orca_ver}.zip
+orca_ver=adb-5.x
+wget https://github.com/arenadata/gporca/archive/${orca_ver}.zip
+unzip ${orca_ver}.zip
 cd gporca-${orca_ver}
 mkdir build
 cd build
