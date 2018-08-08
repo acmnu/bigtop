@@ -476,9 +476,17 @@ bigtop {
                pkg = base
                release = 1 }
       tarball { destination = "${name}-${version.base}.tar.gz"
-               source      = System.getenv('GPDB_BRANCH') ? System.getenv('GPDB_BRANCH') + ".zip" : "adb-5.x.zip" }
-      url     { site = "https://github.com/arenadata/gpdb/archive/"
-                archive = site }
+               source      = System.getenv('GPDB_BRANCH') ? System.getenv('GPDB_BRANCH') + ".tar.gz" : "${name}-${version.base}.tar.gz" }
+
+      git 	  {repo  = "https://github.com/arenadata/gpdb.git"
+      		   ref   =  System.getenv('GPDB_BRANCH') ?: 'adb-5.x'
+      		   dir   = "${name}-${version.base}"
+      	
+      }
+
+
+
+
     }
     'ambari' {
       name    = 'ambari'
