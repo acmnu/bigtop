@@ -16,14 +16,9 @@
 
 set -ex
 
-mkdir  -p add_libs
 cd add_libs
-xerca_ver=adb-5.x
-wget https://github.com/arenadata/gp-xerces/archive/${xerca_ver}.zip
-unzip ${xerca_ver}.zip
-rm -f ${xerca_ver}.zip
 
-cd gp-xerces-${xerca_ver}
+cd gp-xerces
 mkdir build
 cd build
 ../configure --prefix=$1
@@ -31,11 +26,7 @@ make
 make install DESTDIR=$2
 cd ../..
 
-orca_ver=adb-5.x
-wget https://github.com/arenadata/gporca/archive/${orca_ver}.zip
-unzip ${orca_ver}.zip
-rm -f ${orca_ver}.zip
-cd gporca-${orca_ver}
+cd gporca
 mkdir build
 cd build
 
