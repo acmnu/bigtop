@@ -492,8 +492,8 @@ bigtop {
       tarball { destination = "${name}-${version.base}.tar.gz"
                source      =  "${name}-${version.base}.tar.gz" }
 
-      git 	  {repo  = "https://github.com/hyperic/sigar.git"
-      		   ref   =  System.getenv('GPDB_BRANCH') ?: 'master'
+      git 	  {repo  = "https://github.com/boundary/sigar.git"
+      		   ref   =  'master'
       		   dir   = "${name}-${version.base}" }
     }
 

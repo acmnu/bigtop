@@ -20,7 +20,7 @@
 %define autorequire no
 %else
 %define bin_sigar /usr/lib64
-%define doc_sigar /share/doc/%{name}-%{sigar_base_version}
+%define doc_sigar /usr/share/doc/%{name}-%{sigar_base_version}
 %define autorequire yes
 %endif
 %define  debug_package %{nil}
@@ -64,7 +64,7 @@ cp -f -r ChangeLog $RPM_BUILD_ROOT%{doc_sigar}
 
 %files
 %defattr(-,root,root)
-/usr/lib64
-/share/doc/%{name}-%{sigar_base_version}
+%{bin_sigar}
+%{doc_sigar}
 
 %changelog
