@@ -480,14 +480,23 @@ bigtop {
 
       git 	  {repo  = "https://github.com/arenadata/gpdb.git"
       		   ref   =  System.getenv('GPDB_BRANCH') ?: 'adb-5.x'
-      		   dir   = "${name}-${version.base}"
-      	
-      }
-
-
-
-
+      		   dir   = "${name}-${version.base}" }
     }
+
+    'sigar' {
+      name    = 'sigar'
+      relNotes = 'sigar'
+      version { base = '1.6.5'
+               pkg = base
+               release = 1 }
+      tarball { destination = "${name}-${version.base}.tar.gz"
+               source      =  "${name}-${version.base}.tar.gz" }
+
+      git 	  {repo  = "https://github.com/hyperic/sigar.git"
+      		   ref   =  System.getenv('GPDB_BRANCH') ?: 'master'
+      		   dir   = "${name}-${version.base}" }
+    }
+
     'ambari' {
       name    = 'ambari'
       relNotes = 'Apache Ambari'
