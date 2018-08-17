@@ -41,7 +41,17 @@ Source1: do-component-build
 AutoReqProv: %{autorequire}
 
 %description
-sigar
+Sigar
+
+
+%package headers
+Summary: Sigar Header Files
+Group: Development/Libraries
+Requires: %{name} = %{version}-%{release}
+
+%description headers
+Sigar Header Files
+
 
 %prep
 %setup -n %{name}-%{sigar_base_version}
@@ -69,8 +79,10 @@ cp -f -r ChangeLog $RPM_BUILD_ROOT%{doc_sigar}
 %files
 %defattr(-,root,root)
 %{bin_sigar}/*
-%{header_sigar}/*
 %{doc_sigar}
 
+%files headers
+%defattr(-,root,root)
+%{header_sigar}/*
 
 %changelog
