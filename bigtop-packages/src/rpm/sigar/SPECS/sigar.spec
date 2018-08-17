@@ -17,10 +17,12 @@
 %if  %{?suse_version:1}0
 %define bin_sigar /usr/lib64
 %define doc_sigar /usr/share/doc/%{name}-%{sigar_base_version}
+%define header_sigar /usr/local/include
 %define autorequire no
 %else
 %define bin_sigar /usr/lib64
 %define doc_sigar /usr/share/doc/%{name}-%{sigar_base_version}
+%define header_sigar /usr/local/include
 %define autorequire yes
 %endif
 %define  debug_package %{nil}
@@ -39,7 +41,17 @@ Source1: do-component-build
 AutoReqProv: %{autorequire}
 
 %description
-sigar
+Sigar
+
+
+%package headers
+Summary: Sigar Header Files
+Group: Development/Libraries
+Requires: %{name} = %{version}-%{release}
+
+%description headers
+Sigar Header Files
+
 
 %prep
 %setup -n %{name}-%{sigar_base_version}
@@ -53,8 +65,10 @@ sigar
 bash %{SOURCE1}
 mkdir -p $RPM_BUILD_ROOT%{bin_sigar}
 mkdir -p $RPM_BUILD_ROOT%{doc_sigar}
+mkdir -p $RPM_BUILD_ROOT%{header_sigar}
 
 cp -f -r build/build-src/*.so $RPM_BUILD_ROOT%{bin_sigar}
+cp -f -r include/*.h $RPM_BUILD_ROOT%{header_sigar}
 cp -f -r AUTHORS $RPM_BUILD_ROOT%{doc_sigar}
 cp -f -r LICENSE $RPM_BUILD_ROOT%{doc_sigar}
 cp -f -r NOTICE  $RPM_BUILD_ROOT%{doc_sigar}
@@ -64,7 +78,11 @@ cp -f -r ChangeLog $RPM_BUILD_ROOT%{doc_sigar}
 
 %files
 %defattr(-,root,root)
-%{bin_sigar}
+%{bin_sigar}/*
 %{doc_sigar}
+
+%files headers
+%defattr(-,root,root)
+%{header_sigar}/*
 
 %changelog
