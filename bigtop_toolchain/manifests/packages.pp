@@ -15,7 +15,7 @@
 
 class bigtop_toolchain::packages {
   case $operatingsystem{
-    /(?i:(centos|fedora))/: {
+    /(?i:(redhat|centos|fedora))/: {
       # Fedora 20 and CentOS 7 or above are using mariadb, while CentOS 6 is still mysql
       if ($operatingsystem == "CentOS") and ($operatingsystemmajrelease <=6) {
         $mysql_devel="mysql-devel"

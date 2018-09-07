@@ -47,7 +47,7 @@ class bigtop_toolchain::protobuf {
     }
     default: {
       case $operatingsystem {
-         /(?i:(centos|fedora|amazon))/: {
+         /(?i:(redhat|centos|fedora|amazon))/: {
           case $architecture {
            'ppc64le' : { 
             exec { 'install_mrdocs_repo':
