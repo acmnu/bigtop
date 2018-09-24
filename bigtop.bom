@@ -472,7 +472,7 @@ bigtop {
     'gpdb' {
       name    = 'gpdb'
       relNotes = 'GreenPlum'
-      version { base = System.getenv('GPDB_VERSION') ?: '5.9.0_arenadata2'
+      version { base = System.getenv('GPDB_VERSION') ?: '5.11.0_arenadata3'
                pkg = base
                release = 1 }
       tarball { destination = "${name}-${version.base}.tar.gz"
