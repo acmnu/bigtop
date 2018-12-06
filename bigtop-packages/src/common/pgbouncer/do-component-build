@@ -1,0 +1,70 @@
+#!/bin/bash
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set -ex
+
+. `dirname $0`/bigtop.bom
+
+CURDIR=$(pwd)
+DEPSRC=$CURDIR/sources
+PREFIX=$CURDIR/install
+
+mkdir $PREFIX & mkdir $DEPSRC
+
+#mvn clean package -DskipTests -Dhbase10.version=$HBASE_VERSION "$@"
+
+#rm -rf build/dist
+#mkdir -p build/dist
+#tar -C build/dist --strip-components=1 -xzf distribution/target/ycsb-$YCSB_VERSION.tar.gz
+
+
+#git submodule init
+#git submodule update
+
+wget https://ftp.osuosl.org/pub/blfs/conglomeration/libevent/libevent-2.0.22-stable.tar.gz
+wget https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.40.tgz
+wget https://ftp.openssl.org/source/old/1.0.2/openssl-1.0.2c.tar.gz
+
+mkdir dep
+
+tar xzf libevent-2.0.22-stable.tar.gz -C $DEPSRC
+tar xzf openldap-2.4.40.tgz -C $DEPSRC
+tar xzf openssl-1.0.2c.tar.gz -C $DEPSRC
+
+cd $DEPSRC/openssl-1.0.2c
+
+./Configure linux-x86_64 --prefix=$PREFIX no-shared no-asm
+make
+make install_sw
+
+cd $DEPSRC/libevent-2.0.22-stable
+./configure  --prefix=$PREFIX --disable-thread-support
+make 
+make install
+
+cd $DEPSRC/openldap-2.4.40
+CFALGS="-I$PREFIX/include" LDFLAGS="-L$PREFIX/libs" ./configure --with-tls --disable-slapd --with-threads --prefix=$PREFIX  --disable-shared  --without-cyrus-sasl
+make 
+cd $DEPSRC/openldap-2.4.40/libraries
+make install
+
+cd $CURDIR
+
+./autogen.sh
+./configure --prefix=$PREFIX --with-libevent=$PREFIX --enable-evd
+make
+make doc/pgbouncer.1 doc/pgbouncer.5
+make install
