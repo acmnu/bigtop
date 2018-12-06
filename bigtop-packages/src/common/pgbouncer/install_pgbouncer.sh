@@ -25,8 +25,17 @@ version=$2
 install -d -m 0755 "${prefix}/usr/bin/"
 install -d -m 0755 "${prefix}/etc/pgbouncer/"
 install -d -m 0755 "${prefix}/usr/lib/systemd/system"
-
+install -d -m 0755 "${prefix}/usr/share/man/man1"
+install -d -m 0755 "${prefix}/usr/share/man/man5"
+install -d -m 0755 "${prefix}/usr/share/doc/pgbouncer"
 
 cp -R pgbouncer "${prefix}/usr/bin/"
 cp -R etc/pgbouncer.ini "${prefix}/etc/pgbouncer/"
-cp -R install/share  "${prefix}/usr/"
+cp -R doc/pgbouncer.1  "${prefix}/usr/share/man/man1"
+cp -R doc/pgbouncer.5  "${prefix}/usr/share/man/man5"
+cp -R AUTHORS "${prefix}/usr/share/doc/pgbouncer"
+cp -R COPYRIGHT "${prefix}/usr/share/doc/pgbouncer"
+cp -R NEWS.rst "${prefix}/usr/share/doc/pgbouncer"
+cp -R README.rst "${prefix}/usr/share/doc/pgbouncer"
+
+#cp -R install/share  "${prefix}/usr/"

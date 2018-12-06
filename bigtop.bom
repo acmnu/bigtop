@@ -486,11 +486,11 @@ bigtop {
     'pgbouncer' {
       name    = 'pgbouncer'
       relNotes = 'Connection pool for Greenplum Database'
-      version { base = '1.6.1'; pkg = '1.6.1'; release = 1 }
+      version { base = '1.8.1'; pkg = '1.8.1'; release = 1 }
       tarball { destination = "${name}-${version.base}.tar.gz"
                 source      = "${name}-${version.base}.tar.gz" }
       git     {repo  = "https://github.com/greenplum-db/pgbouncer.git"
-             ref   =  'master'
+             ref   =  'pgbouncer_1_8_1'
              dir   = "${name}-${version.base}" }
     }
 
