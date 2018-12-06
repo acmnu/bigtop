@@ -69,6 +69,7 @@ class bigtop_toolchain::packages {
         "bison",
         "perl-Env",
         "libffi-devel"
+        "python-docutils"
       ]
     }
     /(?i:(SLES|opensuse))/: { $pkgs = [
