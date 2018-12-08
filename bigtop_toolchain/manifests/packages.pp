@@ -68,7 +68,7 @@ class bigtop_toolchain::packages {
         "apr-devel",
         "bison",
         "perl-Env",
-        "libffi-devel"
+        "libffi-devel",
         "python-docutils"
       ]
     }
