@@ -43,7 +43,7 @@ getent passwd pxf >/dev/null || useradd -c "pxf" -s /sbin/nologin -g pxf -r pxf 
 %files 
 %defattr(-,root,root,755)
 %config(noreplace) /etc/pxf/
-%attr(0755,pfx,pxf) /usr/lib/pxf/
+%attr(0755,pxf,pxf) /usr/lib/pxf/
 %attr(0664,root,root)/etc/systemd/system/*
 
 %changelog
