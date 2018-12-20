@@ -1,0 +1,33 @@
+*** pxf-4.1.0/server/pxf-service/src/scripts/pxf-env-default.sh.old	2018-12-05 03:41:29.000000000 +0300
+--- pxf-4.1.0/server/pxf-service/src/scripts/pxf-env-default.sh	2018-12-20 15:16:41.932178108 +0300
+***************
+*** 48,57 ****
+  export JAVA_HOME=${JAVA_HOME:=/usr/java/default}
+  
+  # Path to Log directory
+! export PXF_LOGDIR=${PXF_LOGDIR:=${PXF_CONF}/logs}
+  
+  # Path to Run directory
+! export PXF_RUNDIR=${PXF_HOME}/run
+  
+  # Port
+  export PXF_PORT=${PXF_PORT:=5888}
+--- 48,57 ----
+  export JAVA_HOME=${JAVA_HOME:=/usr/java/default}
+  
+  # Path to Log directory
+! export PXF_LOGDIR=/var/log/pxf
+  
+  # Path to Run directory
+! export PXF_RUNDIR=/var/run/pxf
+  
+  # Port
+  export PXF_PORT=${PXF_PORT:=5888}
+***************
+*** 70,72 ****
+--- 70,74 ----
+  
+  # Set to true to enable Remote debug via port 8000
+  export PXF_DEBUG=${PXF_DEBUG:=false}
++ 
++ export PXF_USER=pxf

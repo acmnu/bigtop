@@ -27,7 +27,10 @@ etc_dir="${prefix}/etc/pxf"
 install -d -m 0755 "${pxf_dir}"
 install -d -m 0755 "${etc_dir}"
 install -d -m 0755 "${prefix}/var/log/pxf"
-install -d -m 0755 "${prefix}/etc/systemd/system/"
+install -d -m 0755 "${prefix}/var/lib/pxf"
+install -d -m 0755 "${prefix}/etc/init.d"
+install -d -m 0755 "${prefix}/var/run/pxf/"
+install -d -m 0755 "${prefix}/usr/lib/systemd/system/"
 
 
 tar xf "server/dist/pxf.tar.gz" -C "${pxf_dir}"

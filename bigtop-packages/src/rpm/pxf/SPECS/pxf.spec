@@ -14,6 +14,9 @@ Source1: do-component-build
 Source2: install_%{name}.sh
 Source3: bigtop.bom
 Source4: pxf.service
+#BIGTOP_PATCH_FILES
+
+Requires: hadoop hadoop-hdfs hadoop-mapreduce
 
 
 Requires: bash
@@ -25,6 +28,7 @@ The pxf package provides connection pool for the Greenplum Database.
 
 %prep
 %setup -q -n %{name}-%{pxf_base_version}
+#BIGTOP_PATCH_COMMANDS
 
 %build
 bash $RPM_SOURCE_DIR/do-component-build
@@ -32,19 +36,27 @@ bash $RPM_SOURCE_DIR/do-component-build
 %install
 %__rm -rf $RPM_BUILD_ROOT
 /bin/bash %{SOURCE2} $RPM_BUILD_ROOT %{pxf_version}
-cp -R  %{SOURCE4} $RPM_BUILD_ROOT/etc/systemd/system/
+cp -R  %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/systemd/system/
 
 %pre
 getent group pxf >/dev/null || groupadd -r pxf
 getent passwd pxf >/dev/null || useradd -c "pxf" -s /sbin/nologin -g pxf -r pxf 2> /dev/null || :
 
 
+%post
+systemctl daemon-reload
+su - pxf -c "/usr/lib/pxf/bin/pxf init"
+
+
 
 %files 
 %defattr(-,root,root,755)
-%config(noreplace) /etc/pxf/
+/usr/lib/systemd/system/*
+%config(noreplace) %attr(0755,pxf,pxf) /etc/pxf/
 %attr(0755,pxf,pxf) /usr/lib/pxf/
-%attr(0664,root,root)/etc/systemd/system/*
+%attr(0755,pxf,pxf) /var/log/pxf/
+%attr(0755,pxf,pxf) /var/run/pxf/
+%attr(0755,pxf,pxf) /var/lib/pxf
 
 %changelog
 
