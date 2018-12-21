@@ -45,8 +45,6 @@ getent passwd pxf >/dev/null || useradd -c "pxf" -s /sbin/nologin -g pxf -r pxf 
 
 %post
 systemctl daemon-reload
-su - pxf -c "/usr/lib/pxf/bin/pxf init"
-
 
 
 %files 
