@@ -16,8 +16,6 @@ Source3: bigtop.bom
 Source4: pxf.service
 #BIGTOP_PATCH_FILES
 
-Requires: hadoop hadoop-hdfs hadoop-mapreduce
-
 
 Requires: bash
 Provides: pxf
