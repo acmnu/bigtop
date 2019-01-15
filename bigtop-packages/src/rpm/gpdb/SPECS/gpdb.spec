@@ -43,6 +43,14 @@ AutoReqProv: %{autorequire}
 %description
 gpdb
 
+%package loaders
+Summary: Greenplum Loaders
+Group: System/Daemons
+AutoReqProv: %{autorequire}
+
+%description loaders
+Greenplum Loaders
+
 %prep
 %setup -n %{name}-%{gpdb_base_version}
 
@@ -64,3 +72,10 @@ cp -f -r %{_tmppath}%{bin_gpdb}/* $RPM_BUILD_ROOT/%{bin_gpdb}
 %{bin_gpdb}
 
 %changelog
+
+%files loaders
+%defattr(-,root,root)
+%{bin_gpdb}/bin/gpload*
+%{bin_gpdb}/bin/gpfdist
+%{bin_gpdb}/lib/
+%{bin_gpdb}/greenplum_path.sh
