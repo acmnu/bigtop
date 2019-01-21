@@ -33,7 +33,7 @@ install -d -m 0755 "${prefix}/var/run/pxf/"
 install -d -m 0755 "${prefix}/usr/lib/systemd/system/"
 
 
-tar xf "server/dist/pxf.tar.gz" -C "${pxf_dir}"
+tar xf "server/build/dist/pxf-${version}.tar.gz" -C "${pxf_dir}"
 
 mv "${pxf_dir}/conf" "${etc_dir}/conf"
 cp -r "${etc_dir}/conf" "${etc_dir}/conf.dist"
