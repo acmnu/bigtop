@@ -26,6 +26,7 @@ etc_dir="${prefix}/etc/pxf"
 
 install -d -m 0755 "${pxf_dir}"
 install -d -m 0755 "${etc_dir}"
+install -d -m 0755 "${pxf_dir}/bin"
 install -d -m 0755 "${prefix}/var/log/pxf"
 install -d -m 0755 "${prefix}/var/lib/pxf"
 install -d -m 0755 "${prefix}/etc/init.d"
@@ -37,5 +38,8 @@ tar xf "server/build/dist/pxf-${version}.tar.gz" -C "${pxf_dir}"
 
 mv "${pxf_dir}/conf" "${etc_dir}/conf"
 cp -r "${etc_dir}/conf" "${etc_dir}/conf.dist"
+
+cp server/pxf-service/src/scripts/pxf-service ${pxf_dir}/bin/pxf
+cp cli/go/bin/pxf-cli ${pxf_dir}/bin/
 
 ln -nsf "/etc/pxf/conf" "${pxf_dir}/conf"

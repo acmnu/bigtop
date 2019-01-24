@@ -1,5 +1,5 @@
-*** pxf-4.1.0/server/pxf-service/src/scripts/pxf-env-default.sh.old	2018-12-05 03:41:29.000000000 +0300
---- pxf-4.1.0/server/pxf-service/src/scripts/pxf-env-default.sh	2018-12-20 15:16:41.932178108 +0300
+*** pxf-5.0.1/server/pxf-service/src/scripts/pxf-env-default.sh.old	2018-12-05 03:41:29.000000000 +0300
+--- pxf-5.0.1/server/pxf-service/src/scripts/pxf-env-default.sh	2018-12-20 15:16:41.932178108 +0300
 ***************
 *** 48,57 ****
   export JAVA_HOME=${JAVA_HOME:=/usr/java/default}
