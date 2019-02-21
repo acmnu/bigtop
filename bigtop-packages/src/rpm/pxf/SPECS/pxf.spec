@@ -42,6 +42,7 @@ getent passwd pxf >/dev/null || useradd -c "pxf" -s /sbin/nologin -g pxf -r pxf 
 
 
 %post
+mkhomedir_helper pxf
 systemctl daemon-reload
 
 
