@@ -6,7 +6,6 @@ Release: %{pgbouncer_release}
 Summary: Connection pool for Greenplum Database
 Group: Development/Tools
 
-BuildArch: x86_64
 Buildroot: %(mktemp -ud %{_tmppath}/%{pgbouncer_name}-%{version}-%{release}-XXXXXX)
 License:  BSD License
 Source0: pgbouncer-%{pgbouncer_base_version}.tar.gz
