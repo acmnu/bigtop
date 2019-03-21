@@ -8,7 +8,7 @@
   
 + export PXF_CONF=/var/lib/pxf
 + export PXF_HOME=/usr/lib/pxf
-+ export JAVA_HOME=/etc/alternatives/jre
++ export JAVA_HOME=/usr/lib/jvm/java-1.8.0
 + 
   parent_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
   
