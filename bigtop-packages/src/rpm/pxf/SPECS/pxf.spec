@@ -16,7 +16,7 @@ Source4: pxf.service
 #BIGTOP_PATCH_FILES
 
 
-Requires: bash
+Requires: bash, java-1.8.0-openjdk-devel
 Provides: pxf
 AutoReqProv: no
 
