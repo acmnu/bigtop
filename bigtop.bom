@@ -348,6 +348,16 @@ bigtop {
              ref   = "v${version.base}-stable"
              dir   = "${name}-${version.base}" }
     }
+    'clickhouse-jdbc' {
+      name    = 'clickhouse-jdbc'
+      relNotes = 'Clickhouse jdbc'
+      version { base = '0.1.52'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "$name-${version.base}.tgz" }
+      git     {repo  = "https://github.com/yandex/clickhouse-jdbc.git"
+             ref   = "master"
+             dir   = "${name}-${version.base}" }
+    }
     'clickhouse-odbc' {
       name    = 'clickhouse-odbc'
       relNotes = 'Clickhouse odbc'
