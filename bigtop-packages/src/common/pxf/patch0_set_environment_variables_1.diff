@@ -1,15 +1,14 @@
-*** pxf-5.0.1/server/pxf-service/src/scripts/pxf-service.old	2018-12-20 14:56:24.824244125 +0300
---- pxf-5.0.1/server/pxf-service/src/scripts/pxf-service	2018-12-20 14:57:44.332760556 +0300
+*** pxf-5.4.0/server/pxf-service/src/scripts/pxf-service.old	2019-05-14 07:10:20.000000000 +0300
+--- pxf-5.4.0/server/pxf-service/src/scripts/pxf-service	2019-05-30 11:37:41.184081403 +0300
 ***************
-*** 20,25 ****
---- 20,29 ----
-  # pxf-service	start/stop/initialize/status the PXF instance
+*** 19,24 ****
+--- 19,27 ----
   #
-  
+  # pxf-service    start/stop/initialize/status the PXF instance
+  #
 + export PXF_CONF=/var/lib/pxf
 + export PXF_HOME=/usr/lib/pxf
 + export JAVA_HOME=/usr/lib/jvm/java-1.8.0
-+ 
+  
   parent_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
   
-  # establish PXF_HOME and global vars used by all commands
