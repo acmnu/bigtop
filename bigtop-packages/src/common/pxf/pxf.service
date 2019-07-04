@@ -9,7 +9,6 @@ User=pxf
 Group=pxf
 ExecStart=/usr/lib/pxf/bin/pxf start
 ExecStop=/usr/lib/pxf/bin/pxf stop
-ExecReload=/bin/kill -HUP $MAINPID
 Restart=always
 RestartSec=60
 
