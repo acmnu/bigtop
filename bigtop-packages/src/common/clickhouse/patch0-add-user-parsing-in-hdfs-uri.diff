@@ -1,0 +1,35 @@
+From 74b2440f665159ecb873540130c61a6c3147195b Mon Sep 17 00:00:00 2001
+From: akonyaev <ka@arenadata.io>
+Date: Tue, 9 Jul 2019 13:26:06 +0300
+Subject: [PATCH] add user parsing in HDFS URI
+
+---
+ dbms/src/IO/HDFSCommon.cpp | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/dbms/src/IO/HDFSCommon.cpp b/dbms/src/IO/HDFSCommon.cpp
+index 34cef18068f..e813a367e9f 100644
+--- a/dbms/src/IO/HDFSCommon.cpp
++++ b/dbms/src/IO/HDFSCommon.cpp
+@@ -2,6 +2,7 @@
+ 
+ #if USE_HDFS
+ #include <Common/Exception.h>
++#include <string.h>
+ namespace DB
+ {
+ namespace ErrorCodes
+@@ -25,6 +26,13 @@ HDFSBuilderPtr createHDFSBuilder(const Poco::URI & uri)
+     hdfsBuilderConfSetStr(builder.get(), "input.write.timeout", "60000"); // 1 min
+     hdfsBuilderConfSetStr(builder.get(), "input.connect.timeout", "60000"); // 1 min
+ 
++    std::string userInfo = uri.getUserInfo();
++    if (!userInfo.empty() && userInfo.front() != ':') {
++        char *user = strtok(const_cast<char *> (userInfo.c_str()), ":");
++        if (user != NULL) {
++            hdfsBuilderSetUserName(builder.get(), user);
++        }
++    }
+     hdfsBuilderSetNameNode(builder.get(), host.c_str());
+     hdfsBuilderSetNameNodePort(builder.get(), port);
+     return builder;
