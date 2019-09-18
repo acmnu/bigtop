@@ -7,7 +7,7 @@ Summary: Connection pool for Greenplum Database
 Group: Development/Tools
 
 Buildroot: %(mktemp -ud %{_tmppath}/%{tkh_connector_name}-%{version}-%{release}-XXXXXX)
-License:  BSD License
+License:  Arenadata License
 Source0: tkh-connector-%{tkh_connector_base_version}.tar.gz
 Source1: do-component-build 
 Source2: install_%{name}.sh
