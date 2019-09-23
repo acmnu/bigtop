@@ -521,7 +521,7 @@ bigtop {
     'tkh-connector' {
       name    = 'tkh-connector'
       relNotes = 'tkh-connector'
-      version { base = '0.3'; pkg = base; release = 1 }
+      version { base = '0.4'; pkg = base; release = 1 }
       tarball { destination = "${name}-${version.base}.tar.gz"
                 source      = "${name}-${version.base}.tar.gz" }
       git     {repo  = "git@github.com:arenadata/tkh-connector.git"
