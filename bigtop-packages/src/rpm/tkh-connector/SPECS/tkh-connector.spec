@@ -32,5 +32,4 @@ bash $RPM_SOURCE_DIR/do-component-build
 
 
 %files 
-%defattr(-,root,root,755)
-/usr/lib/pxf/lib/*
+%attr(0755,pxf,pxf) /usr/lib/pxf/lib/*
