@@ -533,7 +533,7 @@ bigtop {
     'gptkh' {
       name    = 'gptkh'
       relNotes = 'gptkh'
-      version { base = '0.2'; pkg = base; release = 1 }
+      version { base = '0.3'; pkg = base; release = 1 }
       tarball { destination = "${name}-${version.base}.tar.gz"
                 source      = "${name}-${version.base}.tar.gz" }
       git     {repo  = "git@github.com:arenadata/gptkh.git"
