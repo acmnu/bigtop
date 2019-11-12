@@ -13,6 +13,7 @@ Source1: do-component-build
 Source2: install_%{name}.sh
 Source3: bigtop.bom
 Source4: pgbouncer.service
+Source5: pgbouncer
 
 
 Requires: bash
@@ -32,6 +33,11 @@ bash $RPM_SOURCE_DIR/do-component-build
 %__rm -rf $RPM_BUILD_ROOT
 /bin/bash %{SOURCE2} $RPM_BUILD_ROOT %{pgbouncer_rest_version}
 cp -R  %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/systemd/system/
+cp -R  %{SOURCE5} $RPM_BUILD_ROOT/etc/pam.d/
+
+%pre
+getent group pgbouncer >/dev/null || groupadd -r pgbouncer
+getent passwd pgbouncer >/dev/null || useradd -c "pgbouncer" -s /sbin/nologin -g pgbouncer -r pgbouncer 2> /dev/null || :
 
 
 %files 
@@ -40,5 +46,8 @@ cp -R  %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/systemd/system/
 /etc/pgbouncer/
 /usr/lib/systemd/system/*
 /usr/share/doc/pgbouncer/
+/etc/pam.d/pgbouncer
 /usr/share/man/man1/*
 /usr/share/man/man5/*
+%attr(0755,pgbouncer,pgbouncer)/var/log/pgbouncer
+%attr(0755,pgbouncer,pgbouncer)/var/run/pgbouncer
