@@ -28,6 +28,11 @@ install -d -m 0755 "${prefix}/usr/lib/systemd/system"
 install -d -m 0755 "${prefix}/usr/share/man/man1"
 install -d -m 0755 "${prefix}/usr/share/man/man5"
 install -d -m 0755 "${prefix}/usr/share/doc/pgbouncer"
+install -d -m 0755 "${prefix}/etc/pam.d/"
+install -d -m 0755 "${prefix}/var/log/pgbouncer"
+install -d -m 0755 "${prefix}/var/run/pgbouncer"
+
+
 
 cp -R pgbouncer "${prefix}/usr/bin/"
 cp -R etc/pgbouncer.ini "${prefix}/etc/pgbouncer/"
@@ -35,7 +40,6 @@ cp -R doc/pgbouncer.1  "${prefix}/usr/share/man/man1"
 cp -R doc/pgbouncer.5  "${prefix}/usr/share/man/man5"
 cp -R AUTHORS "${prefix}/usr/share/doc/pgbouncer"
 cp -R COPYRIGHT "${prefix}/usr/share/doc/pgbouncer"
-cp -R NEWS.rst "${prefix}/usr/share/doc/pgbouncer"
-cp -R README.rst "${prefix}/usr/share/doc/pgbouncer"
+cp -R NEWS.md "${prefix}/usr/share/doc/pgbouncer"
+cp -R README.md "${prefix}/usr/share/doc/pgbouncer"
 
-#cp -R install/share  "${prefix}/usr/"

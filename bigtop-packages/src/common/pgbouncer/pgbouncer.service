@@ -8,7 +8,7 @@
 # http://fedoraproject.org/wiki/Systemd#How_do_I_customize_a_unit_file.2F_add_a_custom_unit_file.3F
 
 [Unit]
-Description=A lightweight connection pooler for PostgreSQL
+Description=pgBouncer connection pooling for Arenadata DB
 After=syslog.target
 After=network.target
 
@@ -25,9 +25,14 @@ Environment=BOUNCERCONF=/etc/pgbouncer/pgbouncer.ini
 # Where to send early-startup messages from the server 
 # This is normally controlled by the global default set by systemd
 # StandardOutput=syslog
+ExecStartPre=-/usr/bin/mkdir -p /var/run/pgbouncer /var/log/pgbouncer
+ExecStartPre=/usr/bin/chown -R pgbouncer:pgbouncer /var/run/pgbouncer /var/log/pgbouncer
+
 
 ExecStart=/usr/bin/pgbouncer -d -q ${BOUNCERCONF}
 ExecReload=/usr/bin/pgbouncer -R -q ${BOUNCERCONF}
+
+PIDFile=/var/run/pgbouncer/pgbouncer.pid
 
 # Give a reasonable amount of time for the server to start up/shut down
 TimeoutSec=300
