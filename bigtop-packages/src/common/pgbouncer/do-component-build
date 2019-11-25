@@ -64,7 +64,7 @@ make install
 cd $CURDIR
 
 ./autogen.sh
-./configure --prefix=$PREFIX --with-libevent=$PREFIX/lib  --with-openssl=$PREFIX/lib --enable-evd
+./configure --prefix=$PREFIX --with-libevent=$PREFIX/lib   --with-pam --with-openssl=$PREFIX/lib --enable-evd
 make
 make doc/pgbouncer.1 doc/pgbouncer.5
 make install
