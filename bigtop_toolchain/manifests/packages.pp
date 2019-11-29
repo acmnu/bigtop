@@ -42,6 +42,7 @@ class bigtop_toolchain::packages {
         "openssl-devel",
         "python-devel",
         "python-setuptools",
+        "pam-devel",
         "libxml2-devel",
         "libxslt-devel",
         "cyrus-sasl-devel",
