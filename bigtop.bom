@@ -496,7 +496,7 @@ bigtop {
     'pxf' {
       name    = 'pxf'
       relNotes = 'Framework that allows a distributed database '
-      version { base = '5.9.2'; pkg = base; release = 2 }
+      version { base = '5.10.0'; pkg = base; release = 2 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "${version.base}.tar.gz" }
       url     { site = "https://github.com/greenplum-db/pxf/archive"
